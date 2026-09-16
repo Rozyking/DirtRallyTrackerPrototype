@@ -1,0 +1,6 @@
+.hero {
+    background-image: url('/src/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+}

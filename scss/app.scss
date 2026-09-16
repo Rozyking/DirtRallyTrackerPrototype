@@ -1,0 +1,57 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+// Variables
+$brand-primary: #d9534f; 
+$brand-primary-light: #f5c1bf;
+$brand-dark: #1a1a1a;
+$brand-primary-dark: #7a2f2c;
+
+$form-check-input-checked-bg-color: $brand-primary;
+$form-check-input-checked-border-color: $brand-dark;
+
+$accordion-button-active-bg: $brand-primary-light;
+$accordion-button-focus-box-shadow: $brand-primary-light;
+
+$progress-height: 4px;
+$progress-bar-bg: $brand-primary-dark;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.btn-custom {
+  @include button-variant(
+  $background: $brand-primary,
+  $border: $brand-primary,
+  $hover-background: $brand-primary-dark,
+  $hover-border: $brand-primary-dark
+  );
+}
+
+// Hero
+.hero {
+  background-image: url('/src/banner.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+}
+
+.mask {
+  background-color: rgba($brand-dark, 0.6); 
+}
+
+footer {
+  background-color: $brand-primary-light;
+}
+
+i {
+  color: $brand-primary
+}
+
+body {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Ropa Sans', sans-serif;
+}

@@ -1,0 +1,10 @@
+// Generates compiled SCSS file as .min.css and .min.css.map into css folder
+{
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "compressed",
+      "extensionName": ".min.css",
+      "savePath": "/css"
+    }
+  ]
+}
