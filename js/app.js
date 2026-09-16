@@ -16,7 +16,7 @@ const resultStage = document.getElementById("resultStage");
 
 //Fetch function to load stage data from .json file
 function loadStageData() {
-  fetch("/data/stages.json")
+  fetch("../data/stages.json")
     .then(handleFetchResponse)
     .then(handleDataLoaded)
     .catch(handleFetchError);
