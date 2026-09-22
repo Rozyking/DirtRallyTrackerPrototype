@@ -39,9 +39,13 @@
         </div>
         <div class="modal-body">
           <form action="/">
-            <select class="form-select form-select-lg mb-3" id="resultStage" aria-label="Large select for stages">
-              <option selected disabled>Choose a stage</option>
-            </select>
+            <div class="form-floating">
+              <select class="form-select form-select-lg mb-3 h-100" id="resultStage"
+                aria-label="Large select for stages">
+                <option selected disabled>Choose a stage</option>
+              </select>
+              <label for="resultStage">Stage</label>
+            </div>
             <div class="row mb-3">
               <div class="form-floating col-4">
                 <input type="number" class="form-control" id="floatingPosition" placeholder="20" min="1">
@@ -54,14 +58,18 @@
             </div>
             <div class="row mb-3">
               <div class="col-6">
-                <select class="form-select form-select-sm h-100 fs-6 mb-3" aria-label="Small select for weather">
-                  <option selected disabled>Choose weather</option>
-                  <option value="Clear">Clear/Sunny</option>
-                  <option value="Cloudy">Cloudy</option>
-                  <option value="Drizzle">Drizzle/Light rain</option>
-                  <option value="Heavy">Heavy rain</option>
-                  <option value="Night">Night</option>
-                </select>
+                <div class="form-floating">
+                  <select class="form-select form-select-sm h-100 fs-6 mb-3" id="weatherSelect"
+                    aria-label="Small select for weather">
+                    <option selected disabled>Choose weather</option>
+                    <option value="Clear">Clear/Sunny</option>
+                    <option value="Cloudy">Cloudy</option>
+                    <option value="Drizzle">Drizzle/Light rain</option>
+                    <option value="Heavy">Heavy rain</option>
+                    <option value="Night">Night</option>
+                  </select>
+                  <label for="weatherSelect">Weather</label>
+                </div>
               </div>
               <div class="form-floating col-6">
                 <input type="text" class="form-control" id="floatingTimeInput" placeholder="3:58.223">
@@ -101,19 +109,24 @@
                 <label for="floatingEventDateInput" class="ms-2">Date started</label>
               </div>
               <div class="col-5">
-                <select class="form-select form-select-sm h-100 fs-6" aria-label="Small select for rank">
-                  <option selected disabled>Choose rank</option>
-                  <option value="Time-trials">Time Trials</option>
-                  <option value="Clear">Open</option>
-                  <option value="Cloudy">Clubman</option>
-                  <option value="Drizzle">Semi-Pro</option>
-                  <option value="Heavy">Pro</option>
-                  <option value="Night">Elite</option>
-                </select>
+                <div class="form-floating">
+                  <select class="form-select form-select-sm h-100 fs-6" id="rankSelect"
+                    aria-label="Small select for rank">
+                    <option selected disabled>Choose rank</option>
+                    <option value="Time-trials">Time Trials</option>
+                    <option value="Clear">Open</option>
+                    <option value="Cloudy">Clubman</option>
+                    <option value="Drizzle">Semi-Pro</option>
+                    <option value="Heavy">Pro</option>
+                    <option value="Night">Elite</option>
+                  </select>
+                  <label for="rankSelect">Rank</label>
+                </div>
               </div>
             </div>
-            <div class="mb-3">
-              <select class="form-select form-select-lg h-100 fs-6 mb-3" aria-label="large select for car">
+            <div class="mb-3 form-floating">
+              <select class="form-select form-select-lg h-100 fs-6 mb-3" id="carSelect"
+                aria-label="large select for car">
                 <option selected disabled>Choose car</option>
                 <option value="mini-cooper-s">Mini Cooper S (H1 FWD)</option>
                 <option value="peugeot-205-gti">Peugeot 205 GTI (H2 FWD)</option>
@@ -126,20 +139,25 @@
                 <option value="ford-fiesta-r5">Ford Fiesta R5 (R5)</option>
                 <option value="porsche-911-rgt">Porsche 911 RGT (Rally GT)</option>
               </select>
+              <label for="carSelect">Car</label>
             </div>
             <div class="row mb-3">
               <div class="col-8">
-                <select class="form-select form-select-lg h-100 fs-6 mb-3" aria-label="large select for event type">
-                  <option selected disabled>Choose event</option>
-                  <option value="career-rally">Career Rally</option>
-                  <option value="career-rallycross">Career Rallycross</option>
-                  <option value="daily-challenge">Daily Challenge</option>
-                  <option value="weekly-challenge">Weekly Challenge</option>
-                  <option value="monthly-challenge">Monthly Challenge</option>
-                  <option value="daily-ai-challenge">Daily AI Challenge</option>
-                  <option value="weekly-ai-challenge">Weekly AI Challenge</option>
-                  <option value="monthly-ai-challenge">Monthly AI Challenge</option>
-                </select>
+                <div class="form-floating">
+                  <select class="form-select form-select-lg h-100 fs-6 mb-3" id="eventSelect"
+                    aria-label="large select for event type">
+                    <option selected disabled>Choose event</option>
+                    <option value="career-rally">Career Rally</option>
+                    <option value="career-rallycross">Career Rallycross</option>
+                    <option value="daily-challenge">Daily Challenge</option>
+                    <option value="weekly-challenge">Weekly Challenge</option>
+                    <option value="monthly-challenge">Monthly Challenge</option>
+                    <option value="daily-ai-challenge">Daily AI Challenge</option>
+                    <option value="weekly-ai-challenge">Weekly AI Challenge</option>
+                    <option value="monthly-ai-challenge">Monthly AI Challenge</option>
+                  </select>
+                  <label for="eventSelect">Event type</label>
+                </div>
               </div>
               <div class="form-floating col-4">
                 <input type="number" class="form-control" id="floatingRaceNumber" placeholder="6" min="1">
@@ -293,9 +311,8 @@
               </div>
             </div>
           </div>
-
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 align-self-start">
           <button type="button" class="btn btn-custom w-100 py-5" data-bs-toggle="modal"
             data-bs-target="#eventsModal">Add Event</button>
         </div>
@@ -304,23 +321,27 @@
       <div class="row pb-4">
         <div class="col-lg-6 mt-4">
           <h2 class="text-center mt-3 mb-2">Stage Times</h2>
-          <select id="countrySelect" class="form-select form-select-lg mb-3" aria-label="Large select for countries">
-            <option selected>Choose a country to view times</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Australia">Australia</option>
-            <option value="Belgium">Belgium</option>
-            <option value="Canada">Canada</option>
-            <option value="France">France</option>
-            <option value="New Zealand">New Zealand</option>
-            <option value="Norway">Norway</option>
-            <option value="Poland">Poland</option>
-            <option value="Portugal">Portugal</option>
-            <option value="SpainR">Spain (Rally)</option>
-            <option value="SpainRX">Spain (Rallycross)</option>
-            <option value="Sweden">Sweden</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="United States">United States</option>
-          </select>
+          <div class="form-floating">
+            <select id="countrySelect" class="form-select form-select-lg mb-3 h-100"
+              aria-label="Large select for countries">
+              <option selected>Choose a country to view times</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Australia">Australia</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Canada">Canada</option>
+              <option value="France">France</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Norway">Norway</option>
+              <option value="Poland">Poland</option>
+              <option value="Portugal">Portugal</option>
+              <option value="SpainR">Spain (Rally)</option>
+              <option value="SpainRX">Spain (Rallycross)</option>
+              <option value="Sweden">Sweden</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="United States">United States</option>
+            </select>
+            <label for="countrySelect">Country</label>
+          </div>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -334,15 +355,19 @@
               <!-- JS fills this in -->
             </tbody>
           </table>
-          <button type="button" class="btn btn-custom w-100" data-bs-toggle="modal" data-bs-target="#resultsModal">Add
+          <button type="button" class="btn btn-custom w-100 py-3" data-bs-toggle="modal"
+            data-bs-target="#resultsModal">Add
             Result</button>
         </div>
         <div class="col-lg-6 mt-4">
           <h2 class="text-center mt-3 mb-2">Stage Chart</h2>
-          <select class="form-select form-select-lg mb-3" id="stageSelect" aria-label="Large select for stages"
-            disabled>
-            <option selected disabled>Choose a stage</option>
-          </select>
+          <div class="form-floating">
+            <select class="form-select form-select-lg mb-3 h-100" id="stageSelect" aria-label="Large select for stages"
+              disabled>
+              <option selected disabled>Choose a stage</option>
+            </select>
+            <label for="stageSelect">Stage</label>
+          </div>
           <img src="src/chart-placeholder.svg" alt="Placeholder for chart of race times">
         </div>
       </div>
