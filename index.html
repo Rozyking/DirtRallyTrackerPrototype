@@ -49,11 +49,12 @@
             </div>
             <div class="row mb-3">
               <div class="form-floating col-4">
-                <input type="number" class="form-control" id="floatingPosition" placeholder="20" min="1">
+                <input type="number" class="form-control" id="floatingPosition" placeholder="20" min="1"
+                  v-model="resultForm.position">
                 <label for="floatingPosition" class="ms-2">Position</label>
               </div>
               <div class="form-floating col-8">
-                <input type="date" class="form-control" id="floatingDateInput" placeholder="01/01/2000">
+                <input type="date" class="form-control" id="floatingDateInput" placeholder="01/01/2000" v-model="resultForm.date">
                 <label for="floatingDateInput" class="ms-2">Result Date</label>
               </div>
             </div>
@@ -61,8 +62,8 @@
               <div class="col-6">
                 <div class="form-floating">
                   <select class="form-select form-select-sm h-100 fs-6 mb-3" id="weatherSelect"
-                    aria-label="Small select for weather">
-                    <option selected disabled>Choose weather</option>
+                    v-model="resultForm.weather" aria-label="Small select for weather">
+                    <option :value="null" disabled>Choose weather</option>
                     <option value="Clear">Clear/Sunny</option>
                     <option value="Cloudy">Cloudy</option>
                     <option value="Drizzle">Drizzle/Light rain</option>
@@ -73,16 +74,16 @@
                 </div>
               </div>
               <div class="form-floating col-6">
-                <input type="text" class="form-control" id="floatingTimeInput" placeholder="3:58.223">
+                <input type="text" class="form-control" id="floatingTimeInput" placeholder="3:58.223" v-model="resultForm.time">
                 <label for="floatingTimeInput" class="ms-2">Time (mm:ss.fff)</label>
               </div>
             </div>
             <div class="form-floating mb-3">
-              <textarea class="form-control" placeholder="Race notes" id="floatingTextareaNotes"></textarea>
+              <textarea class="form-control" placeholder="Race notes" id="floatingTextareaNotes" v-model="resultForm.notes"></textarea>
               <label for="floatingTextareaNotes">Notes</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="resultPB">
+              <input class="form-check-input" type="checkbox" id="resultPB" v-model="resultForm.pb">
               <label class="form-check-label" for="resultPB">Personal best</label>
             </div>
           </form>
@@ -266,8 +267,8 @@
         <div class="col-lg-6 mt-4">
           <h2 class="text-center mt-3 mb-2">Stage Chart</h2>
           <div class="form-floating">
-            <select class="form-select form-select-lg mb-3 h-100" id="stageSelect" v-model="selectedStage" :disabled="!selectedCountry" aria-label="Large select for stages"
-              disabled>
+            <select class="form-select form-select-lg mb-3 h-100" id="stageSelect" v-model="selectedStage"
+              :disabled="!selectedCountry" aria-label="Large select for stages" disabled>
               <option v-bind:value="null" disabled>Choose a stage</option>
               <option v-for="stage in filteredStages" :key="stage" :value="stage">{{stage}}</option>
             </select>
