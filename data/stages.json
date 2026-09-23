@@ -1,122 +1,122 @@
 {
-  "Argentina": [
-    { "stage": "Las Juntas", "time": "3:12.4", "conditions": "Dry", "pb": true },
-    { "stage": "Camino a La Puerto", "time": "3:15.8", "conditions": "Dry", "pb": false },
-    { "stage": "Valle de los puentes", "time": "3:04.1", "conditions": "Overcast", "pb": false },
-    { "stage": "Valle de los puentes a la inversa", "time": "3:07.6", "conditions": "Overcast", "pb": true },
-    { "stage": "Camino de acantilados y rocas", "time": "2:18.9", "conditions": "Dry", "pb": false },
-    { "stage": "Camino de acantilados y rocas inverso", "time": "2:21.3", "conditions": "Dry", "pb": false },
-    { "stage": "San Isidro", "time": "1:58.2", "conditions": "Wet", "pb": true },
-    { "stage": "Camino a Coneta", "time": "2:01.7", "conditions": "Wet", "pb": false },
-    { "stage": "Miraflores", "time": "1:32.5", "conditions": "Dry", "pb": false },
-    { "stage": "Huillaprima", "time": "1:29.8", "conditions": "Dry", "pb": true },
-    { "stage": "El Rodeo", "time": "1:10.3", "conditions": "Overcast", "pb": false },
-    { "stage": "La Merced", "time": "1:12.9", "conditions": "Overcast", "pb": false }
-  ],
-  "Australia": [
-    { "stage": "Mount Kaye Pass", "time": "5:42.1", "conditions": "Dry", "pb": true },
-    { "stage": "Mount Kaye Pass Reverse", "time": "5:48.7", "conditions": "Dry", "pb": false },
-    { "stage": "Chandlers Creek", "time": "5:35.4", "conditions": "Sunny", "pb": false },
-    { "stage": "Chandlers Creek Reverse", "time": "5:39.9", "conditions": "Sunny", "pb": true },
-    { "stage": "Rockton Plains", "time": "3:08.6", "conditions": "Dry", "pb": false },
-    { "stage": "Rockton Plains Reverse", "time": "3:11.2", "conditions": "Dry", "pb": false },
-    { "stage": "Yambulla Mountain Ascent", "time": "2:54.3", "conditions": "Overcast", "pb": true },
-    { "stage": "Yambulla Mountain Descent", "time": "2:49.8", "conditions": "Overcast", "pb": false },
-    { "stage": "Noorinbee Ridge Ascent", "time": "2:22.7", "conditions": "Sunny", "pb": false },
-    { "stage": "Noorinbee Ridge Descent", "time": "2:19.4", "conditions": "Sunny", "pb": false },
-    { "stage": "Bondi Forest", "time": "2:58.1", "conditions": "Dry", "pb": true },
-    { "stage": "Taylor Farm Sprint", "time": "3:01.5", "conditions": "Dry", "pb": false }
-  ],
-  "Belgium": [
-    { "stage": "Mettet Circuit", "time": "1:24.6", "conditions": "Dry", "pb": true }
-  ],
-  "Canada": [
-    { "stage": "Trois-Rivières Circuit", "time": "1:31.2", "conditions": "Overcast", "pb": false }
-  ],
-  "France": [
-    { "stage": "Lohéac Circuit", "time": "1:19.8", "conditions": "Wet", "pb": false }
-  ],
-  "New Zealand": [
-    { "stage": "Waimarama Point Forward", "time": "6:47.3", "conditions": "Dry", "pb": true },
-    { "stage": "Waimarama Point Reverse", "time": "6:52.9", "conditions": "Dry", "pb": false },
-    { "stage": "Te Awanga Forward", "time": "4:56.2", "conditions": "Overcast", "pb": false },
-    { "stage": "Ocean Beach", "time": "4:51.7", "conditions": "Overcast", "pb": true },
-    { "stage": "Waimarama Sprint Forward", "time": "3:39.4", "conditions": "Dry", "pb": false },
-    { "stage": "Waimarama Sprint Reverse", "time": "3:42.8", "conditions": "Dry", "pb": false },
-    { "stage": "Elsthorpe Sprint Forward", "time": "3:05.6", "conditions": "Sunny", "pb": true },
-    { "stage": "Elsthorpe Sprint Reverse", "time": "3:08.1", "conditions": "Sunny", "pb": false },
-    { "stage": "Ocean Beach Sprint Forward", "time": "2:47.3", "conditions": "Wet", "pb": false },
-    { "stage": "Ocean Beach Sprint Reverse", "time": "2:50.9", "conditions": "Wet", "pb": false },
-    { "stage": "Te Awanga Sprint Forward", "time": "2:01.5", "conditions": "Dry", "pb": true },
-    { "stage": "Te Awanga Sprint Reverse", "time": "2:04.2", "conditions": "Dry", "pb": false }
-  ],
-  "Norway": [
-    { "stage": "Hell Circuit", "time": "1:27.4", "conditions": "Snow", "pb": true }
-  ],
-  "Poland": [
-    { "stage": "Zarobka", "time": "6:58.7", "conditions": "Dry", "pb": false },
-    { "stage": "Zagorze", "time": "7:02.3", "conditions": "Dry", "pb": true },
-    { "stage": "Marynka", "time": "3:52.9", "conditions": "Overcast", "pb": false },
-    { "stage": "Borysik", "time": "3:49.5", "conditions": "Overcast", "pb": false },
-    { "stage": "Kopina", "time": "2:58.6", "conditions": "Sunny", "pb": true },
-    { "stage": "Jozefin", "time": "3:01.2", "conditions": "Sunny", "pb": false },
-    { "stage": "Jezioro Rotcze", "time": "5:41.8", "conditions": "Dry", "pb": false },
-    { "stage": "Zienki", "time": "5:44.9", "conditions": "Dry", "pb": false },
-    { "stage": "Lejno", "time": "2:49.3", "conditions": "Wet", "pb": true },
-    { "stage": "Jagodno", "time": "2:52.7", "conditions": "Wet", "pb": false },
-    { "stage": "Czarny Las", "time": "2:41.4", "conditions": "Overcast", "pb": false },
-    { "stage": "Jezioro Lukie", "time": "2:44.8", "conditions": "Overcast", "pb": false }
-  ],
-  "Portugal": [
-    { "stage": "Montalegre Circuit", "time": "1:22.9", "conditions": "Dry", "pb": false }
-  ],
-  "SpainR": [
-    { "stage": "Comienzo De Bellriu", "time": "6:12.4", "conditions": "Dry", "pb": true },
-    { "stage": "Final de Bellriu", "time": "6:18.9", "conditions": "Dry", "pb": false },
-    { "stage": "Centenera", "time": "4:33.6", "conditions": "Sunny", "pb": false },
-    { "stage": "Camino a Centenera", "time": "4:37.1", "conditions": "Sunny", "pb": true },
-    { "stage": "Ascenso por valle el Gualet", "time": "2:59.8", "conditions": "Overcast", "pb": false },
-    { "stage": "Salida desde Montverd", "time": "3:02.5", "conditions": "Overcast", "pb": false },
-    { "stage": "Vinedos dentro del valle Parra", "time": "2:54.3", "conditions": "Dry", "pb": true },
-    { "stage": "Ascenso bosque Montverd", "time": "2:56.9", "conditions": "Dry", "pb": false },
-    { "stage": "Vinedos Dardenya", "time": "2:48.7", "conditions": "Wet", "pb": false },
-    { "stage": "Vinedos Dardenya inversa", "time": "2:51.4", "conditions": "Wet", "pb": false },
-    { "stage": "Descenso por carretera", "time": "1:56.2", "conditions": "Sunny", "pb": true },
-    { "stage": "Subida por carretera", "time": "1:58.8", "conditions": "Sunny", "pb": false }
-  ],
-  "SpainRX": [
-    { "stage": "Circuit de Barcelona-Catalunya", "time": "1:16.3", "conditions": "Dry", "pb": true }
-  ],
-  "Sweden": [
-    { "stage": "Ransbysater", "time": "5:18.6", "conditions": "Snow", "pb": true },
-    { "stage": "Norraskoga", "time": "5:22.1", "conditions": "Snow", "pb": false },
-    { "stage": "Hamra", "time": "5:31.4", "conditions": "Snow", "pb": false },
-    { "stage": "Lysvik", "time": "5:27.9", "conditions": "Snow", "pb": true },
-    { "stage": "Stor-jangen Sprint", "time": "3:11.8", "conditions": "Overcast", "pb": false },
-    { "stage": "Stor-jangen Sprint Reverse", "time": "3:14.5", "conditions": "Overcast", "pb": false },
-    { "stage": "Algsjon Sprint", "time": "2:33.2", "conditions": "Snow", "pb": true },
-    { "stage": "Skogsrallyt", "time": "2:36.7", "conditions": "Snow", "pb": false },
-    { "stage": "Algsjon", "time": "3:19.4", "conditions": "Overcast", "pb": false },
-    { "stage": "Elgsjon", "time": "3:22.8", "conditions": "Overcast", "pb": false },
-    { "stage": "Bjorklangen", "time": "2:28.1", "conditions": "Snow", "pb": true },
-    { "stage": "Ostra Hinnsjon", "time": "2:31.6", "conditions": "Snow", "pb": false }
-  ],
-  "United Kingdom": [
-    { "stage": "Silverstone Circuit", "time": "1:29.7", "conditions": "Wet", "pb": true },
-    { "stage": "Lydden Hill Circuit", "time": "1:12.4", "conditions": "Wet", "pb": false }
-  ],
-  "United States": [
-    { "stage": "North Fork Pass", "time": "5:44.8", "conditions": "Dry", "pb": true },
-    { "stage": "North Fork Pass Reverse", "time": "5:49.3", "conditions": "Dry", "pb": false },
-    { "stage": "Beaver Creek Trail Forward", "time": "5:57.1", "conditions": "Overcast", "pb": false },
-    { "stage": "Beaver Creek Trail Reverse", "time": "6:01.6", "conditions": "Overcast", "pb": false },
-    { "stage": "Fuller Mountain Ascent", "time": "3:02.4", "conditions": "Sunny", "pb": true },
-    { "stage": "Fuller Mountain Descent", "time": "2:58.9", "conditions": "Sunny", "pb": false },
-    { "stage": "Hancock Creek Burst", "time": "3:09.5", "conditions": "Dry", "pb": false },
-    { "stage": "Fury Lake Depart", "time": "3:12.1", "conditions": "Dry", "pb": false },
-    { "stage": "Hancock Hill Sprint Forward", "time": "2:41.7", "conditions": "Wet", "pb": true },
-    { "stage": "Hancock Hill Sprint Reverse", "time": "2:44.3", "conditions": "Wet", "pb": false },
-    { "stage": "Tolt Valley Sprint Forward", "time": "2:47.8", "conditions": "Overcast", "pb": false },
-    { "stage": "Tolt Valley Sprint Reverse", "time": "2:50.2", "conditions": "Overcast", "pb": false }
-  ]
+    "Argentina": [
+        "Las Juntas",
+        "Camino a La Puerto",
+        "Valle de los puentes",
+        "Valle de los puentes a la inversa",
+        "Camino de acantilados y rocas",
+        "Camino de acantilados y rocas inverso",
+        "San Isidro",
+        "Camino a Coneta",
+        "Miraflores",
+        "Huillaprima",
+        "El Rodeo",
+        "La Merced"
+    ],
+    "Australia": [
+        "Mount Kaye Pass",
+        "Mount Kaye Pass Reverse",
+        "Chandlers Creek",
+        "Chandlers Creek Reverse",
+        "Rockton Plains",
+        "Rockton Plains Reverse",
+        "Yambulla Mountain Ascent",
+        "Yambulla Mountain Descent",
+        "Noorinbee Ridge Ascent",
+        "Noorinbee Ridge Descent",
+        "Bondi Forest",
+        "Taylor Farm Sprint"
+    ],
+    "Belgium": [
+        "Mettet Circuit"
+    ],
+    "Canada": [
+        "Trois-Rivi\u00e8res Circuit"
+    ],
+    "France": [
+        "Loh\u00e9ac Circuit"
+    ],
+    "New Zealand": [
+        "Waimarama Point Forward",
+        "Waimarama Point Reverse",
+        "Te Awanga Forward",
+        "Ocean Beach",
+        "Waimarama Sprint Forward",
+        "Waimarama Sprint Reverse",
+        "Elsthorpe Sprint Forward",
+        "Elsthorpe Sprint Reverse",
+        "Ocean Beach Sprint Forward",
+        "Ocean Beach Sprint Reverse",
+        "Te Awanga Sprint Forward",
+        "Te Awanga Sprint Reverse"
+    ],
+    "Norway": [
+        "Hell Circuit"
+    ],
+    "Poland": [
+        "Zarobka",
+        "Zagorze",
+        "Marynka",
+        "Borysik",
+        "Kopina",
+        "Jozefin",
+        "Jezioro Rotcze",
+        "Zienki",
+        "Lejno",
+        "Jagodno",
+        "Czarny Las",
+        "Jezioro Lukie"
+    ],
+    "Portugal": [
+        "Montalegre Circuit"
+    ],
+    "SpainR": [
+        "Comienzo De Bellriu",
+        "Final de Bellriu",
+        "Centenera",
+        "Camino a Centenera",
+        "Ascenso por valle el Gualet",
+        "Salida desde Montverd",
+        "Vinedos dentro del valle Parra",
+        "Ascenso bosque Montverd",
+        "Vinedos Dardenya",
+        "Vinedos Dardenya inversa",
+        "Descenso por carretera",
+        "Subida por carretera"
+    ],
+    "SpainRX": [
+        "Circuit de Barcelona-Catalunya"
+    ],
+    "Sweden": [
+        "Ransbysater",
+        "Norraskoga",
+        "Hamra",
+        "Lysvik",
+        "Stor-jangen Sprint",
+        "Stor-jangen Sprint Reverse",
+        "Algsjon Sprint",
+        "Skogsrallyt",
+        "Algsjon",
+        "Elgsjon",
+        "Bjorklangen",
+        "Ostra Hinnsjon"
+    ],
+    "United Kingdom": [
+        "Silverstone Circuit",
+        "Lydden Hill Circuit"
+    ],
+    "United States": [
+        "North Fork Pass",
+        "North Fork Pass Reverse",
+        "Beaver Creek Trail Forward",
+        "Beaver Creek Trail Reverse",
+        "Fuller Mountain Ascent",
+        "Fuller Mountain Descent",
+        "Hancock Creek Burst",
+        "Fury Lake Depart",
+        "Hancock Hill Sprint Forward",
+        "Hancock Hill Sprint Reverse",
+        "Tolt Valley Sprint Forward",
+        "Tolt Valley Sprint Reverse"
+    ]
 }
