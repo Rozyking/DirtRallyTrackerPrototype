@@ -40,9 +40,10 @@
         <div class="modal-body">
           <form action="/">
             <div class="form-floating">
-              <select class="form-select form-select-lg mb-3 h-100" id="resultStage"
+              <select class="form-select form-select-lg mb-3 h-100" id="resultStage" v-model="resultForm.stage"
                 aria-label="Large select for stages">
-                <option selected disabled>Choose a stage</option>
+                <option :value="null" disabled>Choose a stage</option>
+                <option v-for="stage in filteredStages" :key="stage" :value="stage">{{stage}}</option>
               </select>
               <label for="resultStage">Stage</label>
             </div>
@@ -202,14 +203,14 @@
                   <div class="col-11">
                     <p class="mb-1"><strong>{{event.place}}</strong> — {{event.car}}</p>
                     <p class="mb-1">Rank: {{event.rank}}</p>
-                    <p class="mb-3">Next Stage: {{event.nextStage}}</p>
+                    <p class="mb-3">Next Stage: {{ event.nextStage }}, {{ event.country }}</p>
                   </div>
                   <div class="col-1">
                     <i class="bi bi-trash fs-3"></i>
                   </div>
                 </div>
                 <button type="button" class="btn btn-custom w-100" data-bs-toggle="modal" data-bs-target="#resultsModal"
-                  data-stage="Mettet Circuit">
+                  @click="prefillResultForEvent(event)">
                   + Add Result
                 </button>
               </div>

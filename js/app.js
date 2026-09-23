@@ -17,7 +17,8 @@ const app = createApp({
           rank: "Clubman",
           car: "Ford Fiesta OMSE Supercar Lites",
           place: "12th Place",
-          nextStage: "Mettet, Belgium — Qualifier",
+          country: "Belgium",
+          nextStage: "Mettet Circuit",
           progress: 65,
           results: []
         },
@@ -26,7 +27,8 @@ const app = createApp({
           rank: "Semi-Pro",
           car: "Subaru Impreza 1995",
           place: "4th Place",
-          nextStage: "Mount Kaye Pass, Australia",
+          country: "Australia",
+          nextStage: "Mount Kaye Pass",
           progress: 40,
           results: [
             { stage: "Mount Kaye Pass", position: 4, time: "3:58.223", weather: "Clear", pb: true }
@@ -37,7 +39,8 @@ const app = createApp({
           rank: "Weekly Leaderboard",
           car: "Ford Focus RS Rally 2001",
           place: "321st Place",
-          nextStage: "La Merced, Argentina",
+          country: "Argentina",
+          nextStage: "La Merced",
           progress: 80,
           results: []
         }
@@ -128,8 +131,14 @@ const app = createApp({
       };
       this.results.push(entry);
       this.resultForm = { stage: null, position: null, date: null, weather: null, time: null, notes: "", pb: false };
+    },
+
+    prefillResultForEvent(event) {
+      this.selectedCountry = event.country;
+      this.resultForm.stage = event.nextStage;
     }
   },
+
 
 
 }).mount("#app")
