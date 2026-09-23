@@ -265,9 +265,10 @@
         <div class="col-lg-6 mt-4">
           <h2 class="text-center mt-3 mb-2">Stage Chart</h2>
           <div class="form-floating">
-            <select class="form-select form-select-lg mb-3 h-100" id="stageSelect" aria-label="Large select for stages"
+            <select class="form-select form-select-lg mb-3 h-100" id="stageSelect" v-model="selectedStage" :disabled="!selectedCountry" aria-label="Large select for stages"
               disabled>
-              <option selected disabled>Choose a stage</option>
+              <option v-bind:value="null" disabled>Choose a stage</option>
+              <option v-for="stage in filteredStages" :key="stage" :value="stage">{{stage}}</option>
             </select>
             <label for="stageSelect">Stage</label>
           </div>
