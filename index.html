@@ -109,6 +109,28 @@
         <div class="modal-body">
           <form>
             <div class="row mb-3">
+              <div class="col-6">
+                <div class="form-floating">
+                  <select class="form-select form-select-lg h-100 fs-6" id="eventCountrySelect"
+                    v-model="eventForm.country" aria-label="Large select for event country">
+                    <option :value="null" disabled>Choose a country</option>
+                    <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
+                  </select>
+                  <label for="eventCountrySelect">Country</label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-floating">
+                  <select class="form-select form-select-lg h-100 fs-6" id="eventStageSelect" v-model="eventForm.stage"
+                    :disabled="!eventForm.country" aria-label="Large select for event stage">
+                    <option :value="null" disabled>Choose a stage</option>
+                    <option v-for="stage in eventCountryStages" :key="stage" :value="stage">{{ stage }}</option>
+                  </select>
+                  <label for="eventStageSelect">Next Stage</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
               <div class="form-floating col-7">
                 <input type="date" class="form-control" id="floatingEventDateInput" placeholder="01/01/2000"
                   v-model="eventForm.date">

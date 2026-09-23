@@ -69,7 +69,9 @@ const app = createApp({
         rank: null,
         car: null,
         type: null,
-        stageCount: null
+        stageCount: null,
+        country: null,
+        stage: null
       }
 
     };
@@ -82,7 +84,7 @@ const app = createApp({
         fetch("data/stages.json"),
         fetch("data/cars.json")
       ]);
-      
+
       if (!stagesResponse.ok) {
         throw new Error("Failed to load stage data: " + stagesResponse.status);
       }
@@ -116,14 +118,26 @@ const app = createApp({
       const groups = [];
       for (const car of this.carsData) {
         let group = groups.find(g => g.name === car.group);
-        if(!group) {
-          group = {name: car.group, cars: []};
+        if (!group) {
+          group = { name: car.group, cars: [] };
           groups.push(group);
         }
         group.cars.push(car);
       }
 
       return groups;
+    },
+
+    eventCountryStages() {
+      return this.stageData[this.eventForm.country] || [];
+    }
+  },
+
+  watch: {
+    "eventForm.country"(newCountry, oldCountry) {
+      if (newCountry !== oldCountry) {
+        this.eventForm.stage = null;
+      }
     }
   },
 
@@ -138,12 +152,13 @@ const app = createApp({
         name: this.eventForm.type,
         rank: this.eventForm.rank,
         car: this.eventForm.car,
-        place: "—",
-        nextStage: "—",
+        place: "1st Place",
+        country: this.eventForm.country,
+        nextStage: this.eventForm.stage,
         progress: 0,
         results: []
       });
-      this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null };
+      this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null, country: null, stage: null };
     },
 
     addResult() {
