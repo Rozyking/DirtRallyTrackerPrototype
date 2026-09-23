@@ -38,14 +38,36 @@
         </div>
         <div class="modal-body">
           <form>
+            <div class="mb-3 form-floating">
+              <select class="form-select form-select-lg h-100 fs-6 mb-3" id="resultCountrySelect"
+                v-model="resultForm.country" @change="resultForm.stage = null" 
+                aria-label="Large select for country">
+                <option :value="null" disabled>Choose a country</option>
+                <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
+              </select>
+              <label for="resultCountrySelect">Country</label>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <select class="form-select form-select-lg h-100 fs-6 mb-3" id="resultCarSelect" v-model="resultForm.car"
+                :disabled="lockResultContext" aria-label="large select for car">
+                <option :value="null" disabled>Choose car</option>
+                <optgroup v-for="group in carGroups" :key="group.name" :label="group.name">
+                  <option v-for="car in group.cars" :key="car.name" :value="car.name">{{ car.name }}</option>
+                </optgroup>
+              </select>
+              <label for="resultCarSelect">Car</label>
+            </div>
+
             <div class="form-floating">
-              <select class="form-select form-select-lg mb-3 h-100" id="resultStage" v-model="resultForm.stage"
-                aria-label="Large select for stages">
+              <select class="form-select form-select mb-3 h-100" id="resultStage" v-model="resultForm.stage"
+                :disabled="!resultForm.country" aria-label="select for stages">
                 <option :value="null" disabled>Choose a stage</option>
-                <option v-for="stage in filteredStages" :key="stage" :value="stage">{{stage}}</option>
+                <option v-for="stage in resultModalStages" :key="stage" :value="stage">{{stage}}</option>
               </select>
               <label for="resultStage">Stage</label>
             </div>
+
             <div class="row mb-3">
               <div class="form-floating col-4">
                 <input type="number" class="form-control" id="floatingPosition" placeholder="20" min="1"
@@ -58,6 +80,7 @@
                 <label for="floatingDateInput" class="ms-2">Result Date</label>
               </div>
             </div>
+
             <div class="row mb-3">
               <div class="col-6">
                 <div class="form-floating">
@@ -79,6 +102,7 @@
                 <label for="floatingTimeInput" class="ms-2">Time (mm:ss.fff)</label>
               </div>
             </div>
+
             <div class="form-floating mb-3">
               <textarea class="form-control" placeholder="Race notes" id="floatingTextareaNotes"
                 v-model="resultForm.notes"></textarea>
@@ -234,7 +258,7 @@
                   </div>
                 </div>
                 <button type="button" class="btn btn-custom w-100" data-bs-toggle="modal" data-bs-target="#resultsModal"
-                  @click="prefillResultForEvent(event)">
+                  @click="prefillResultForEvent(event, index)">
                   + Add Result
                 </button>
               </div>
@@ -286,9 +310,9 @@
               </tr>
             </tbody>
           </table>
-          <button type="button" class="btn btn-custom w-100 py-3" data-bs-toggle="modal"
-            data-bs-target="#resultsModal">+ Add
-            Result</button>
+          <button type="button" class="btn btn-custom w-100 py-3" data-bs-toggle="modal" data-bs-target="#resultsModal"
+            @click="prefillResultForEvent(event, index)">+ Add
+          Result</button>
         </div>
         <div class="col-lg-6 mt-4">
           <h2 class="text-center mt-3 mb-2">Stage Chart</h2>

@@ -61,8 +61,12 @@ const app = createApp({
         weather: null,
         time: null,
         notes: "",
-        pb: false
+        pb: false,
+        country: null,
+        car: null
       },
+      lockResultContext: false,
+      activeEventIndex: null,
 
       // data for events modal
       eventForm: {
@@ -131,6 +135,10 @@ const app = createApp({
 
     eventCountryStages() {
       return this.stageData[this.eventForm.country] || [];
+    },
+
+    resultModalStages() {
+      return this.stageData[this.resultForm.country] || [];
     }
   },
 
@@ -150,6 +158,12 @@ const app = createApp({
     startAddEvent() {
       this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null, country: null, stage: null };
       this.editingIndex = null;
+    },
+
+    startAddResult() {
+      this.resultForm = { stage: null, position: null, date: null, weather: null, time: null, notes: "", pb: false, country: this.selectedCountry, car: null };
+      this.lockResultContext = false;
+      this.activeEventIndex = null;
     },
 
     saveEvent() {
@@ -183,12 +197,22 @@ const app = createApp({
       const entry = {
         country: this.selectedCountry,
         stage: this.resultForm.stage,
+        car: this.resultForm.car,
         time: this.resultForm.time,
         conditions: this.resultForm.weather,
         pb: this.resultForm.pb
       };
+
+      if (this.activeEventIndex !== null) {
+        const event = this.events[this.activeEventIndex];
+        event.results.push(entry);
+        event.progress = Math.min(100, event.progress + 10);
+      }
+
       this.results.push(entry);
-      this.resultForm = { stage: null, position: null, date: null, weather: null, time: null, notes: "", pb: false };
+      this.resultForm = { stage: null, position: null, date: null, weather: null, time: null, notes: "", pb: false, country: null, car: null };
+      this.lockResultContext = false;
+      this.activeEventIndex = null;
     },
 
     editEvent(index) {
@@ -205,9 +229,12 @@ const app = createApp({
       this.editingIndex = index;
     },
 
-    prefillResultForEvent(event) {
+    prefillResultForEvent(event, index) {
       this.selectedCountry = event.country;
       this.resultForm.stage = event.nextStage;
+      this.resultForm.car = event.car;
+      this.lockResultContext = true;
+      this.activeEventIndex = index;
     }
   },
 
