@@ -1,93 +1,172 @@
-// Stage data generated with AI
-let stageData = {};
+// // Stage data generated with AI
+// let stageData = {};
 
 
-// Country select bar
-const countrySelect = document.getElementById("countrySelect");
+// // Country select bar
+// const countrySelect = document.getElementById("countrySelect");
 
-// Table under select bar
-const tableBody = document.getElementById("stageTableBody");
+// // Table under select bar
+// const tableBody = document.getElementById("stageTableBody");
 
-// Stage select bar (only available when country is selected)
-const stageSelect = document.getElementById("stageSelect");
+// // Stage select bar (only available when country is selected)
+// const stageSelect = document.getElementById("stageSelect");
 
-// Modal stage select (uses same stages as country selected)
-const resultStage = document.getElementById("resultStage");
+// // Modal stage select (uses same stages as country selected)
+// const resultStage = document.getElementById("resultStage");
 
-//Fetch function to load stage data from .json file
-function loadStageData() {
-  fetch("../data/stages.json")
-    .then(handleFetchResponse)
-    .then(handleDataLoaded)
-    .catch(handleFetchError);
-}
+const {createApp} = Vue;
 
-// Handles fetch response regardless of error or no error - throws error for error handler later
-function handleFetchResponse(response) {
-  if (!response.ok) {
-    throw new Error("Failed to load stage data: " + response.status);
-  }
-  return response.json();
-}
+const app = createApp({
+  // all the data for the app
+  data: function () {
+    return {
 
-//Fetched data loaded into current js file
-function handleDataLoaded(data) {
-  stageData = data;
-}
+      // holds stage data from stages.json after fetch
+      stageData: {},
+      selectedCountry: null,
 
-// Handles thrown error in an easy way for user to see
-function handleFetchError(error) {
-  console.error("Error loading stage data:", error);
-  tableBody.innerHTML = '<tr><td colspan="4" class="text-center text-danger">Failed to load stage data</td></tr>';
-}
+      // holds data for accordion blocks with event data
+      events: [
+        {
+          name: "Career Rallycross",
+          rank: "Clubman",
+          car: "Ford Fiesta OMSE Supercar Lites",
+          place: "12th Place",
+          nextStage: "Mettet, Belgium — Qualifier",
+          progress: 65,
+          results: []
+        },
+        {
+          name: "Career Rally",
+          rank: "Semi-Pro",
+          car: "Subaru Impreza 1995",
+          place: "4th Place",
+          nextStage: "Mount Kaye Pass, Australia",
+          progress: 40,
+          results: [
+            { stage: "Mount Kaye Pass", position: 4, time: "3:58.223", weather: "Clear", pb: true }
+          ]
+        },
+        {
+          name: "Weekly Challenge",
+          rank: "Weekly Leaderboard",
+          car: "Ford Focus RS Rally 2001",
+          place: "321st Place",
+          nextStage: "La Merced, Argentina",
+          progress: 80,
+          results: []
+        }
+      ],
+
+      // data for result modal
+      resultForm: {
+        stage: null,
+        position: null,
+        date: null,
+        weather: null,
+        time: null,
+        notes: "",
+        pb: false
+      },
+
+      // data for events modal
+      eventForm: {
+        date: null,
+        rank: null,
+        car: null,
+        type: null,
+        stageCount: null
+      }
+
+    };
+  },
+
+  // values that are updated and cached if dependencies change
+  computed: {
+
+  },
+
+  // usually event triggered by v-on
+  methods: {
+
+  },
+
+}).mount("#app")
+
+// //Fetch function to load stage data from .json file
+// function loadStageData() {
+//   fetch("../data/stages.json")
+//     .then(handleFetchResponse)
+//     .then(handleDataLoaded)
+//     .catch(handleFetchError);
+// }
+
+// // Handles fetch response regardless of error or no error - throws error for error handler later
+// function handleFetchResponse(response) {
+//   if (!response.ok) {
+//     throw new Error("Failed to load stage data: " + response.status);
+//   }
+//   return response.json();
+// }
+
+// //Fetched data loaded into current js file
+// function handleDataLoaded(data) {
+//   stageData = data;
+// }
+
+// // Handles thrown error in an easy way for user to see
+// function handleFetchError(error) {
+//   console.error("Error loading stage data:", error);
+//   tableBody.innerHTML = '<tr><td colspan="4" class="text-center text-danger">Failed to load stage data</td></tr>';
+// }
 
 
-// Listens for new select option
-countrySelect.addEventListener("change", () => {
-  const country = countrySelect.value;
-  const stages = stageData[country] || [];
+// // Listens for new select option
+// countrySelect.addEventListener("change", () => {
+//   const country = countrySelect.value;
+//   const stages = stageData[country] || [];
 
-  // Clear existing rows
-  tableBody.innerHTML = "";
-  stageSelect.innerHTML = '<option selected disabled>Choose a stage</option>';
-  resultStage.innerHTML = '<option selected disabled>Choose a stage</option>';
+//   // Clear existing rows
+//   tableBody.innerHTML = "";
+//   stageSelect.innerHTML = '<option selected disabled>Choose a stage</option>';
+//   resultStage.innerHTML = '<option selected disabled>Choose a stage</option>';
 
-  // Aesthetic placeholder for no user data
-  if (stages.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="4" class="text-center text-muted">No data available</td></tr>`;
-    stageSelect.disabled = true;
-    return;
-  }
+//   // Aesthetic placeholder for no user data
+//   if (stages.length === 0) {
+//     tableBody.innerHTML = `<tr><td colspan="4" class="text-center text-muted">No data available</td></tr>`;
+//     stageSelect.disabled = true;
+//     return;
+//   }
 
-  stageSelect.disabled = false;
-  resultStage.disabled = false;
+//   stageSelect.disabled = false;
+//   resultStage.disabled = false;
 
-  // Adds new row to table for each record for different countries
-  for (let i = 0; i < stages.length; i++) {
-    addStageRow(stages[i]);
-    addStageOption(stageSelect, stages[i]);
-    addStageOption(resultStage, stages[i]);
-  }
+//   // Adds new row to table for each record for different countries
+//   for (let i = 0; i < stages.length; i++) {
+//     addStageRow(stages[i]);
+//     addStageOption(stageSelect, stages[i]);
+//     addStageOption(resultStage, stages[i]);
+//   }
 
-});
+// });
 
-// Takes stage object and creates a table row to be appended (used in event listener)
-function addStageRow(stage) {
-    const row = document.createElement("tr");
-    row.innerHTML = 
-        "<td>" + stage.stage + "</td>" +
-        "<td>" + stage.time + "</td>" +
-        "<td>" + stage.conditions + "</td>" +
-        "<td>" + (stage.pb ? "⭐" : "") + "</td>";
-    tableBody.appendChild(row);
-}
+// // Takes stage object and creates a table row to be appended (used in event listener)
+// function addStageRow(stage) {
+//   const row = document.createElement("tr");
+//   row.innerHTML =
+//     "<td>" + stage.stage + "</td>" +
+//     "<td>" + stage.time + "</td>" +
+//     "<td>" + stage.conditions + "</td>" +
+//     "<td>" + (stage.pb ? "⭐" : "") + "</td>";
+//   tableBody.appendChild(row);
+// }
 
-function addStageOption(selectElement, stage) {
-    const option = document.createElement("option");
-    option.value = stage.stage;
-    option.textContent = stage.stage;
-    selectElement.appendChild(option);
-}
+// function addStageOption(selectElement, stage) {
+//   const option = document.createElement("option");
+//   option.value = stage.stage;
+//   option.textContent = stage.stage;
+//   selectElement.appendChild(option);
+// }
 
-// Runs fetch function for .json data
-loadStageData();
+// // Runs fetch function for .json data
+// loadStageData();
