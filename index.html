@@ -323,9 +323,10 @@
               <h2 class="text-center mt-3 mb-2">Stage Times</h2>
               <div class="form-floating">
                 <select id="countrySelect" class="form-select form-select-lg mb-3 h-100"
-                  aria-label="Large select for countries">
-                  <option selected>Choose a country to view times</option>
-                  <option value="Argentina">Argentina</option>
+                  v-model="selectedCountry" aria-label="Large select for countries">
+                  <option v-bind:value="null">Choose a country to view times</option>
+                  <option v-for="country in countries" v-bind:key="country" v-bind:value="country">{{ country }}</option>
+                  <!-- <option value="Argentina">Argentina</option>
                   <option value="Australia">Australia</option>
                   <option value="Belgium">Belgium</option>
                   <option value="Canada">Canada</option>
@@ -338,7 +339,7 @@
                   <option value="SpainRX">Spain (Rallycross)</option>
                   <option value="Sweden">Sweden</option>
                   <option value="United Kingdom">United Kingdom</option>
-                  <option value="United States">United States</option>
+                  <option value="United States">United States</option> -->
                 </select>
                 <label for="countrySelect">Country</label>
               </div>
