@@ -10,13 +10,14 @@ const app = createApp({
       carsData: [],
       selectedCountry: null,
       selectedStage: null,
+      editingIndex: null,
 
       // holds data for accordion blocks with event data
       events: [
         {
           name: "Career Rallycross",
           rank: "Clubman",
-          car: "Ford Fiesta OMSE Supercar Lites",
+          car: "Ford Fiesta R5",
           place: "12th Place",
           country: "Belgium",
           nextStage: "Mettet Circuit",
@@ -37,8 +38,8 @@ const app = createApp({
         },
         {
           name: "Weekly Challenge",
-          rank: "Weekly Leaderboard",
-          car: "Ford Focus RS Rally 2001",
+          rank: "Pro",
+          car: "Ford Escort Mk II",
           place: "321st Place",
           country: "Argentina",
           nextStage: "La Merced",
@@ -133,32 +134,42 @@ const app = createApp({
     }
   },
 
-  watch: {
-    "eventForm.country"(newCountry, oldCountry) {
-      if (newCountry !== oldCountry) {
-        this.eventForm.stage = null;
-      }
-    }
-  },
-
   // usually event triggered by v-on
   methods: {
     deleteEvent(index) {
       this.events.splice(index, 1);
     },
 
-    addEvent() {
-      this.events.push({
-        name: this.eventForm.type,
-        rank: this.eventForm.rank,
-        car: this.eventForm.car,
-        place: "1st Place",
-        country: this.eventForm.country,
-        nextStage: this.eventForm.stage,
-        progress: 0,
-        results: []
-      });
+    startAddEvent() {
       this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null, country: null, stage: null };
+      this.editingIndex = null;
+    },
+
+    saveEvent() {
+      if (this.editingIndex !== null) {
+        const existing = this.events[this.editingIndex];
+        this.events[this.editingIndex] = {
+          ...existing,
+          name: this.eventForm.type,
+          rand: this.eventForm.rank,
+          car: this.eventForm.car,
+          country: this.eventForm.country,
+          nextStage: this.eventForm.stage
+        };
+      } else {
+        this.events.push({
+          name: this.eventForm.type,
+          rank: this.eventForm.rank,
+          car: this.eventForm.car,
+          place: "1st Place",
+          country: this.eventForm.country,
+          nextStage: this.eventForm.stage,
+          progress: 0,
+          results: []
+        });
+      }
+      this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null, country: null, stage: null };
+      this.editingIndex = null;
     },
 
     addResult() {
@@ -171,6 +182,20 @@ const app = createApp({
       };
       this.results.push(entry);
       this.resultForm = { stage: null, position: null, date: null, weather: null, time: null, notes: "", pb: false };
+    },
+
+    editEvent(index) {
+      const event = this.events[index];
+      this.eventForm = {
+        date: null,
+        rank: event.rank,
+        car: event.car,
+        type: event.name,
+        stageCount: null,
+        country: event.country,
+        stage: event.nextStage
+      };
+      this.editingIndex = index;
     },
 
     prefillResultForEvent(event) {

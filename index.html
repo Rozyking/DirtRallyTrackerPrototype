@@ -103,7 +103,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Enter Event</h5>
+          <h5 class="modal-title">{{ editingIndex !== null ? "Edit Event" : "Enter Event" }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -112,7 +112,7 @@
               <div class="col-6">
                 <div class="form-floating">
                   <select class="form-select form-select-lg h-100 fs-6" id="eventCountrySelect"
-                    v-model="eventForm.country" aria-label="Large select for event country">
+                    v-model="eventForm.country" @change="eventForm.stage" aria-label="Large select for event country">
                     <option :value="null" disabled>Choose a country</option>
                     <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
                   </select>
@@ -189,7 +189,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-custom" @click="addEvent" data-bs-dismiss="modal">Save Event</button>
+          <button type="button" class="btn btn-custom" @click="saveEvent" data-bs-dismiss="modal">Save Event</button>
         </div>
       </div>
     </div>
@@ -227,7 +227,8 @@
                     <p class="mb-3">Next Stage: {{ event.nextStage }}, {{ event.country }}</p>
                   </div>
                   <div class="col-1">
-                    <i class="bi bi-pencil fs-3" role="button"></i>
+                    <i class="bi bi-pencil fs-3" role="button" data-bs-toggle="modal" data-bs-target="#eventsModal"
+                      @click="editEvent(index)"></i>
                   </div>
                   <div class="col-1">
                     <i class="bi bi-trash fs-3" role="button" @click="deleteEvent(index)"></i>
@@ -243,7 +244,8 @@
 
         </div>
         <div class="col-lg-4 align-self-start">
-          <button type="button" class="btn btn-custom w-100 py-5" data-bs-toggle="modal" data-bs-target="#eventsModal">+
+          <button type="button" class="btn btn-custom w-100 py-5" data-bs-toggle="modal" data-bs-target="#eventsModal"
+            @click="startAddEvent">+
             Add Event</button>
         </div>
       </div>
