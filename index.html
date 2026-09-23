@@ -184,7 +184,7 @@
         <!-- Current Events table - Format buttons for adding events to the right on desktop, underneath on mobile -->
         <div class="accordion col-lg-8 mb-3" id="eventsAccordion">
 
-          <!-- Career Rallycross -->
+          <!-- Accordion item (reiterated by Vue)-->
           <div class="accordion-item" v-for="(event, index) in events" :key="index">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -193,7 +193,7 @@
               </button>
             </h2>
             <div class="progress rounded-0">
-              <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0"
+              <div class="progress-bar" role="progressbar" v-bind:style="{width: event.progress + '%'}" aria-valuenow="{{event.progress}}" aria-valuemin="0"
                 aria-valuemax="100"></div>
             </div>
             <div v-bind:id="'event-' + index" class="accordion-collapse collapse" data-bs-parent="#eventsAccordion">
@@ -216,101 +216,6 @@
             </div>
           </div>
 
-          <!-- Career Rally -->
-          <!-- <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#event-rally">
-                Career Rally
-              </button>
-            </h2>
-            <div class="progress rounded-0">
-              <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-            <div id="event-rally" class="accordion-collapse collapse" data-bs-parent="#eventsAccordion">
-              <div class="accordion-body">
-                <div class="row align-items-center">
-                  <div class="col-11">
-                    <p class="mb-1"><strong>4th Place</strong> — Subaru Impreza 1995</p>
-                    <p class="mb-1">Rank: Semi-Pro</p>
-                    <p class="mb-3">Next Stage: Mount Kaye Pass, Australia</p>
-                  </div>
-                  <div class="col-1">
-                    <i class="bi bi-trash fs-3"></i>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-custom w-100" data-bs-toggle="modal" data-bs-target="#resultsModal"
-                  data-stage="Mount Kaye Pass">
-                  + Add Result
-                </button>
-              </div>
-            </div>
-          </div> -->
-
-          <!-- Weekly Challenge -->
-          <!-- <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#event-weekly">
-                Weekly Challenge
-              </button>
-            </h2>
-            <div class="progress rounded-0">
-              <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-            <div id="event-weekly" class="accordion-collapse collapse" data-bs-parent="#eventsAccordion">
-              <div class="accordion-body">
-                <div class="row align-items-center">
-                  <div class="col-11">
-                    <p class="mb-1"><strong>321st Place</strong> — Ford Focus RS Rally 2001</p>
-                    <p class="mb-1">Rank: Weekly Leaderboard</p>
-                    <p class="mb-3">Next Stage: La Merced, Argentina</p>
-                  </div>
-                  <div class="col-1">
-                    <i class="bi bi-trash fs-3"></i>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-custom w-100" data-bs-toggle="modal" data-bs-target="#resultsModal"
-                  data-stage="La Merced">
-                  + Add Result
-                </button>
-              </div>
-            </div>
-          </div> -->
-
-          <!-- Monthly Challenge -->
-          <!-- <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#event-monthly">
-                Monthly Challenge
-              </button>
-            </h2>
-            <div class="progress rounded-0">
-              <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-            <div id="event-monthly" class="accordion-collapse collapse" data-bs-parent="#eventsAccordion">
-              <div class="accordion-body">
-                <div class="row align-items-center">
-                  <div class="col-11">
-                    <p class="mb-1"><strong>1008th Place</strong> — Mitsubishi Lancer Evolution VI</p>
-                    <p class="mb-1">Rank: Monthly Leaderboard</p>
-                    <p class="mb-3">Next Stage: Rockton Plains Reverse, Australia</p>
-                  </div>
-                  <div class="col-1">
-                    <i class="bi bi-trash fs-3"></i>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-custom w-100" data-bs-toggle="modal" data-bs-target="#resultsModal"
-                  data-stage="Rockton Plains Reverse">
-                  + Add Result
-                </button>
-              </div>
-            </div>
-          </div>-->
         </div>
         <div class="col-lg-4 align-self-start">
           <button type="button" class="btn btn-custom w-100 py-5" data-bs-toggle="modal"
@@ -326,20 +231,6 @@
                   v-model="selectedCountry" aria-label="Large select for countries">
                   <option v-bind:value="null">Choose a country to view times</option>
                   <option v-for="country in countries" v-bind:key="country" v-bind:value="country">{{ country }}</option>
-                  <!-- <option value="Argentina">Argentina</option>
-                  <option value="Australia">Australia</option>
-                  <option value="Belgium">Belgium</option>
-                  <option value="Canada">Canada</option>
-                  <option value="France">France</option>
-                  <option value="New Zealand">New Zealand</option>
-                  <option value="Norway">Norway</option>
-                  <option value="Poland">Poland</option>
-                  <option value="Portugal">Portugal</option>
-                  <option value="SpainR">Spain (Rally)</option>
-                  <option value="SpainRX">Spain (Rallycross)</option>
-                  <option value="Sweden">Sweden</option>
-                  <option value="United Kingdom">United Kingdom</option>
-                  <option value="United States">United States</option> -->
                 </select>
                 <label for="countrySelect">Country</label>
               </div>
