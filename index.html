@@ -185,10 +185,10 @@
         <div class="accordion col-lg-8 mb-3" id="eventsAccordion">
 
           <!-- Career Rallycross -->
-          <div class="accordion-item" v-for="event in events">
+          <div class="accordion-item" v-for="(event, index) in events" :key="index">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#event-rallycross">
+                v-bind:data-bs-target="'#event-' + index">
                 {{event.name}}
               </button>
             </h2>
@@ -196,13 +196,13 @@
               <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0"
                 aria-valuemax="100"></div>
             </div>
-            <div id="event-rallycross" class="accordion-collapse collapse" data-bs-parent="#eventsAccordion">
+            <div v-bind:id="'event-' + index" class="accordion-collapse collapse" data-bs-parent="#eventsAccordion">
               <div class="accordion-body">
                 <div class="row align-items-center">
                   <div class="col-11">
-                    <p class="mb-1"><strong>12th Place</strong> — Ford Fiesta OMSE Supercar Lites</p>
-                    <p class="mb-1">Rank: Clubman</p>
-                    <p class="mb-3">Next Stage: Mettet, Belgium — Qualifier</p>
+                    <p class="mb-1"><strong>{{event.place}}</strong> — {{event.car}}</p>
+                    <p class="mb-1">Rank: {{event.rank}}</p>
+                    <p class="mb-3">Next Stage: {{event.nextStage}}</p>
                   </div>
                   <div class="col-1">
                     <i class="bi bi-trash fs-3"></i>
@@ -314,7 +314,7 @@
         </div>
         <div class="col-lg-4 align-self-start">
           <button type="button" class="btn btn-custom w-100 py-5" data-bs-toggle="modal"
-            data-bs-target="#eventsModal">Add Event</button>
+            data-bs-target="#eventsModal">+ Add Event</button>
         </div>
       </div> 
           <!-- Second row: Stages and Statistics -->
@@ -356,7 +356,7 @@
                 </tbody>
               </table>
               <button type="button" class="btn btn-custom w-100 py-3" data-bs-toggle="modal"
-                data-bs-target="#resultsModal">Add
+                data-bs-target="#resultsModal">+ Add
                 Result</button>
             </div>
             <div class="col-lg-6 mt-4">
