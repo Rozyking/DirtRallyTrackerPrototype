@@ -193,8 +193,8 @@
               </button>
             </h2>
             <div class="progress rounded-0">
-              <div class="progress-bar" role="progressbar" v-bind:style="{width: event.progress + '%'}" aria-valuenow="{{event.progress}}" aria-valuemin="0"
-                aria-valuemax="100"></div>
+              <div class="progress-bar" role="progressbar" v-bind:style="{width: event.progress + '%'}"
+                aria-valuenow="{{event.progress}}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div v-bind:id="'event-' + index" class="accordion-collapse collapse" data-bs-parent="#eventsAccordion">
               <div class="accordion-body">
@@ -218,52 +218,63 @@
 
         </div>
         <div class="col-lg-4 align-self-start">
-          <button type="button" class="btn btn-custom w-100 py-5" data-bs-toggle="modal"
-            data-bs-target="#eventsModal">+ Add Event</button>
+          <button type="button" class="btn btn-custom w-100 py-5" data-bs-toggle="modal" data-bs-target="#eventsModal">+
+            Add Event</button>
         </div>
-      </div> 
-          <!-- Second row: Stages and Statistics -->
-          <div class="row pb-4">
-            <div class="col-lg-6 mt-4">
-              <h2 class="text-center mt-3 mb-2">Stage Times</h2>
-              <div class="form-floating">
-                <select id="countrySelect" class="form-select form-select-lg mb-3 h-100"
-                  v-model="selectedCountry" aria-label="Large select for countries">
-                  <option v-bind:value="null">Choose a country to view times</option>
-                  <option v-for="country in countries" v-bind:key="country" v-bind:value="country">{{ country }}</option>
-                </select>
-                <label for="countrySelect">Country</label>
-              </div>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Stage</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Conditions</th>
-                    <th scope="col">PB</th>
-                  </tr>
-                </thead>
-                <tbody id="stageTableBody">
-                  <!-- JS fills this in -->
-                </tbody>
-              </table>
-              <button type="button" class="btn btn-custom w-100 py-3" data-bs-toggle="modal"
-                data-bs-target="#resultsModal">+ Add
-                Result</button>
-            </div>
-            <div class="col-lg-6 mt-4">
-              <h2 class="text-center mt-3 mb-2">Stage Chart</h2>
-              <div class="form-floating">
-                <select class="form-select form-select-lg mb-3 h-100" id="stageSelect"
-                  aria-label="Large select for stages" disabled>
-                  <option selected disabled>Choose a stage</option>
-                </select>
-                <label for="stageSelect">Stage</label>
-              </div>
-              <img src="src/chart-placeholder.svg" alt="Placeholder for chart of race times">
-            </div>
+      </div>
+      <!-- Second row: Stages and Statistics -->
+      <div class="row pb-4">
+        <div class="col-lg-6 mt-4">
+          <h2 class="text-center mt-3 mb-2">Stage Times</h2>
+          <div class="form-floating">
+            <select id="countrySelect" class="form-select form-select-lg mb-3 h-100" v-model="selectedCountry"
+              aria-label="Large select for countries">
+              <option v-bind:value="null">Choose a country to view times</option>
+              <option v-for="country in countries" v-bind:key="country" v-bind:value="country">{{ country }}</option>
+            </select>
+            <label for="countrySelect">Country</label>
           </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Stage</th>
+                <th scope="col">Time</th>
+                <th scope="col">Conditions</th>
+                <th scope="col">PB</th>
+              </tr>
+            </thead>
+            <tbody id="stageTableBody">
+              <tr v-for="(result, index) in stageResults" :key="index">
+                <td>{{result.stage}}</td>
+                <td>{{result.time}}</td>
+                <td>{{result.conditions}}</td>
+                <td>{{result.pb ? "⭐" : ""}}</td>
+              </tr>
+              <tr v-if="!selectedCountry">
+                <td colspan="4" class="text-center text-muted">Choose a country to see stage times</td>
+              </tr>
+              <tr v-else-if="stageResults.length === 0">
+                <td colspan="4" class="text-center text-muted">No data available</td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-custom w-100 py-3" data-bs-toggle="modal"
+            data-bs-target="#resultsModal">+ Add
+            Result</button>
         </div>
+        <div class="col-lg-6 mt-4">
+          <h2 class="text-center mt-3 mb-2">Stage Chart</h2>
+          <div class="form-floating">
+            <select class="form-select form-select-lg mb-3 h-100" id="stageSelect" aria-label="Large select for stages"
+              disabled>
+              <option selected disabled>Choose a stage</option>
+            </select>
+            <label for="stageSelect">Stage</label>
+          </div>
+          <img src="src/chart-placeholder.svg" alt="Placeholder for chart of race times">
+        </div>
+      </div>
+    </div>
   </main>
   <footer class="text-center">
     <p class="p-5 m-0">&copy; Zane Robe - 2026 - Dirt Rally 2.0 Tracker</p>

@@ -1,4 +1,4 @@
-const {createApp} = Vue;
+const { createApp } = Vue;
 
 const app = createApp({
   // all the data for the app
@@ -44,7 +44,9 @@ const app = createApp({
       ],
 
       // logged stage results - separate from events and feeds stage times table
-      results: [],
+      results: [
+        { country: "Belgium", stage: "Mettet Circuit", time: "1:24.6", conditions: "Dry", pb: true }
+      ],
 
       // data for result modal
       resultForm: {
@@ -102,7 +104,7 @@ const app = createApp({
     deleteEvent(index) {
       this.events.splice(index, 1);
     },
- 
+
     addEvent() {
       this.events.push({
         name: this.eventForm.type,
@@ -115,7 +117,7 @@ const app = createApp({
       });
       this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null };
     },
- 
+
     addResult() {
       const entry = {
         country: this.selectedCountry,
@@ -128,7 +130,7 @@ const app = createApp({
       this.resultForm = { stage: null, position: null, date: null, weather: null, time: null, notes: "", pb: false };
     }
   },
-  
+
 
 }).mount("#app")
 
