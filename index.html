@@ -7,7 +7,6 @@
   <title>Dirt Rally 2.0 Tracker</title>
   <link rel="stylesheet" href="css/app.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -268,6 +267,7 @@
                 <th scope="col">Time</th>
                 <th scope="col">Conditions</th>
                 <th scope="col">PB</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody id="stageTableBody">
@@ -276,12 +276,13 @@
                 <td>{{result.time}}</td>
                 <td>{{result.conditions}}</td>
                 <td>{{result.pb ? "⭐" : ""}}</td>
+                <td><i class="bi bi-trash" role="button" @click="deleteResult(result)"></i></td>
               </tr>
               <tr v-if="!selectedCountry">
-                <td colspan="4" class="text-center text-muted">Choose a country to see stage times</td>
+                <td colspan="5" class="text-center text-muted">Choose a country to see stage times</td>
               </tr>
               <tr v-else-if="stageResults.length === 0">
-                <td colspan="4" class="text-center text-muted">No data available</td>
+                <td colspan="5" class="text-center text-muted">No data available</td>
               </tr>
             </tbody>
           </table>

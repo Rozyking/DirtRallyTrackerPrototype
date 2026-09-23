@@ -134,10 +134,17 @@ const app = createApp({
     }
   },
 
-  // usually event triggered by v-on
+  // usually event triggered by v-on/@click
   methods: {
     deleteEvent(index) {
       this.events.splice(index, 1);
+    },
+
+    deleteResult(result) {
+      const index = this.results.indexOf(result);
+      if (index !== -1) {
+        this.results.splice(index, 1);
+      }
     },
 
     startAddEvent() {
@@ -151,7 +158,7 @@ const app = createApp({
         this.events[this.editingIndex] = {
           ...existing,
           name: this.eventForm.type,
-          rand: this.eventForm.rank,
+          rank: this.eventForm.rank,
           car: this.eventForm.car,
           country: this.eventForm.country,
           nextStage: this.eventForm.stage
