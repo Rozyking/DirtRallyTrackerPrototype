@@ -38,7 +38,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="/">
+          <form>
             <div class="form-floating">
               <select class="form-select form-select-lg mb-3 h-100" id="resultStage" v-model="resultForm.stage"
                 aria-label="Large select for stages">
@@ -54,7 +54,8 @@
                 <label for="floatingPosition" class="ms-2">Position</label>
               </div>
               <div class="form-floating col-8">
-                <input type="date" class="form-control" id="floatingDateInput" placeholder="01/01/2000" v-model="resultForm.date">
+                <input type="date" class="form-control" id="floatingDateInput" placeholder="01/01/2000"
+                  v-model="resultForm.date">
                 <label for="floatingDateInput" class="ms-2">Result Date</label>
               </div>
             </div>
@@ -74,12 +75,14 @@
                 </div>
               </div>
               <div class="form-floating col-6">
-                <input type="text" class="form-control" id="floatingTimeInput" placeholder="3:58.223" v-model="resultForm.time">
+                <input type="text" class="form-control" id="floatingTimeInput" placeholder="3:58.223"
+                  v-model="resultForm.time">
                 <label for="floatingTimeInput" class="ms-2">Time (mm:ss.fff)</label>
               </div>
             </div>
             <div class="form-floating mb-3">
-              <textarea class="form-control" placeholder="Race notes" id="floatingTextareaNotes" v-model="resultForm.notes"></textarea>
+              <textarea class="form-control" placeholder="Race notes" id="floatingTextareaNotes"
+                v-model="resultForm.notes"></textarea>
               <label for="floatingTextareaNotes">Notes</label>
             </div>
             <div class="form-check">
@@ -89,7 +92,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-custom">Save results</button>
+          <button type="button" class="btn btn-custom" @click="addResult" data-bs-dismiss="modal">Save results</button>
         </div>
       </div>
     </div>
@@ -104,72 +107,67 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="/">
+          <form>
             <div class="row mb-3">
               <div class="form-floating col-7">
-                <input type="date" class="form-control" id="floatingEventDateInput" placeholder="01/01/2000">
+                <input type="date" class="form-control" id="floatingEventDateInput" placeholder="01/01/2000"
+                  v-model="eventForm.date">
                 <label for="floatingEventDateInput" class="ms-2">Date started</label>
               </div>
               <div class="col-5">
                 <div class="form-floating">
-                  <select class="form-select form-select-sm h-100 fs-6" id="rankSelect"
+                  <select class="form-select form-select-sm h-100 fs-6" id="rankSelect" v-model="eventForm.rank"
                     aria-label="Small select for rank">
-                    <option selected disabled>Choose rank</option>
+                    <option :value="null" disabled>Choose rank</option>
                     <option value="Time-trials">Time Trials</option>
-                    <option value="Clear">Open</option>
-                    <option value="Cloudy">Clubman</option>
-                    <option value="Drizzle">Semi-Pro</option>
-                    <option value="Heavy">Pro</option>
-                    <option value="Night">Elite</option>
+                    <option value="Open">Open</option>
+                    <option value="Clubman">Clubman</option>
+                    <option value="Semi-Pro">Semi-Pro</option>
+                    <option value="Pro">Pro</option>
+                    <option value="Elite">Elite</option>
                   </select>
                   <label for="rankSelect">Rank</label>
                 </div>
               </div>
             </div>
             <div class="mb-3 form-floating">
-              <select class="form-select form-select-lg h-100 fs-6 mb-3" id="carSelect"
+              <select class="form-select form-select-lg h-100 fs-6 mb-3" id="carSelect" v-model="eventForm.car"
                 aria-label="large select for car">
-                <option selected disabled>Choose car</option>
-                <option value="mini-cooper-s">Mini Cooper S (H1 FWD)</option>
-                <option value="peugeot-205-gti">Peugeot 205 GTI (H2 FWD)</option>
-                <option value="ford-escort-mk2">Ford Escort Mk II (H2 RWD)</option>
-                <option value="lancia-stratos">Lancia Stratos (H3 RWD)</option>
-                <option value="audi-quattro-s1-e2">Audi Sport Quattro S1 E2 (Group B 4WD)</option>
-                <option value="lancia-delta-s4">Lancia Delta S4 (Group B 4WD)</option>
-                <option value="subaru-impreza-1995">Subaru Impreza 1995 (Group A)</option>
-                <option value="mitsubishi-lancer-evo6">Mitsubishi Lancer Evolution VI (Group A)</option>
-                <option value="ford-fiesta-r5">Ford Fiesta R5 (R5)</option>
-                <option value="porsche-911-rgt">Porsche 911 RGT (Rally GT)</option>
+                <option :value="null" disabled>Choose car</option>
+                <optgroup v-for="group in carGroups" :key="group.name" :label="group.name">
+                  <option v-for="car in group.cars" :key="car.name" :value="car.name">{{car.name}}</option>
+                </optgroup>
               </select>
               <label for="carSelect">Car</label>
             </div>
             <div class="row mb-3">
               <div class="col-8">
                 <div class="form-floating">
-                  <select class="form-select form-select-lg h-100 fs-6 mb-3" id="eventSelect"
+                  <select class="form-select form-select-lg h-100 fs-6 mb-3" id="eventSelect" v-model="eventForm.type"
                     aria-label="large select for event type">
-                    <option selected disabled>Choose event</option>
-                    <option value="career-rally">Career Rally</option>
-                    <option value="career-rallycross">Career Rallycross</option>
-                    <option value="daily-challenge">Daily Challenge</option>
-                    <option value="weekly-challenge">Weekly Challenge</option>
-                    <option value="monthly-challenge">Monthly Challenge</option>
-                    <option value="daily-ai-challenge">Daily AI Challenge</option>
-                    <option value="weekly-ai-challenge">Weekly AI Challenge</option>
-                    <option value="monthly-ai-challenge">Monthly AI Challenge</option>
+                    <option :value="null" disabled>Choose event</option>
+                    <option value="Career Rally">Career Rally</option>
+                    <option value="Career Rallycross">Career Rallycross</option>
+                    <option value="Daily Challenge">Daily Challenge</option>
+                    <option value="Weekly Challenge">Weekly Challenge</option>
+                    <option value="Monthly Challenge">Monthly Challenge</option>
+                    <option value="Daily AI Challenge">Daily AI Challenge</option>
+                    <option value="Weekly AI Challenge">Weekly AI Challenge</option>
+                    <option value="Monthly AI Challenge">Monthly AI Challenge</option>
                   </select>
                   <label for="eventSelect">Event type</label>
                 </div>
               </div>
               <div class="form-floating col-4">
-                <input type="number" class="form-control" id="floatingRaceNumber" placeholder="6" min="1">
+                <input type="number" class="form-control" id="floatingRaceNumber" placeholder="6" min="1"
+                  v-model="eventForm.stageCount">
                 <label for="floatingRaceNumber" class="ms-2"># of stages</label>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-custom">Save Event</button>
+          <button type="button" class="btn btn-custom" @click="addEvent" data-bs-dismiss="modal">Save Event</button>
         </div>
       </div>
     </div>

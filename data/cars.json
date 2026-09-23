@@ -1,0 +1,42 @@
+[
+  { "name": "Mini Cooper S", "group": "H1 FWD" },
+  { "name": "Lancia Fulvia HF", "group": "H1 FWD" },
+  { "name": "Citroen DS 21", "group": "H1 FWD" },
+
+  { "name": "Peugeot 205 GTI", "group": "H2 FWD" },
+  { "name": "Volkswagen Golf GTI 16V", "group": "H2 FWD" },
+
+  { "name": "Ford Escort Mk II", "group": "H2 RWD" },
+  { "name": "Fiat 131 Abarth Rally", "group": "H2 RWD" },
+  { "name": "Alpine Renault A110 1600 S", "group": "H2 RWD" },
+
+  { "name": "BMW E30 M3 Evo Rally", "group": "H3 RWD" },
+  { "name": "Lancia Stratos", "group": "H3 RWD" },
+  { "name": "Opel Ascona 400", "group": "H3 RWD" },
+  { "name": "Renault 5 Turbo", "group": "H3 RWD" },
+  { "name": "Ford Sierra Cosworth RS500", "group": "H3 RWD" },
+  { "name": "Datsun 240Z", "group": "H3 RWD" },
+
+  { "name": "Audi Sport Quattro S1 E2", "group": "Group B 4WD" },
+  { "name": "MG Metro 6R4", "group": "Group B 4WD" },
+  { "name": "Peugeot 205 T16 Evo 2", "group": "Group B 4WD" },
+  { "name": "Lancia Delta S4", "group": "Group B 4WD" },
+  { "name": "Ford RS200", "group": "Group B 4WD" },
+
+  { "name": "Subaru Impreza 1995", "group": "Group A" },
+  { "name": "Mitsubishi Lancer Evolution VI", "group": "Group A" },
+  { "name": "Ford Escort RS Cosworth", "group": "Group A" },
+  { "name": "Lancia Delta HF Integrale", "group": "Group A" },
+
+  { "name": "Citroen C3 R5", "group": "R5" },
+  { "name": "Volkswagen Polo GTI R5", "group": "R5" },
+  { "name": "Ford Fiesta R5", "group": "R5" },
+  { "name": "Peugeot 208 T16 R5", "group": "R5" },
+  { "name": "Skoda Fabia R5", "group": "R5" },
+  { "name": "Mitsubishi Space Star R5", "group": "R5" },
+
+  { "name": "Porsche 911 RGT", "group": "Rally GT" },
+  { "name": "Chevrolet Camaro GT4.R", "group": "Rally GT" },
+  { "name": "Ford Mustang GT4", "group": "Rally GT" },
+  { "name": "Aston Martin V8 Vantage GT4", "group": "Rally GT" }
+]

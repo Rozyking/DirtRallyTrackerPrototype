@@ -7,6 +7,7 @@ const app = createApp({
 
       // holds stage data from stages.json after fetch
       stageData: {},
+      carsData: [],
       selectedCountry: null,
       selectedStage: null,
 
@@ -77,13 +78,23 @@ const app = createApp({
   // runs once when the app mounts to fetch country and stage data from stages.json
   async created() {
     try {
-      const response = await fetch("data/stages.json");
-      if (!response.ok) {
-        throw new Error("Failed to load stage data: " + response.status);
+      const [stagesResponse, carsResponse] = await Promise.all([
+        fetch("data/stages.json"),
+        fetch("data/cars.json")
+      ]);
+      
+      if (!stagesResponse.ok) {
+        throw new Error("Failed to load stage data: " + stagesResponse.status);
       }
-      this.stageData = await response.json();
+
+      if (!carsResponse.ok) {
+        throw new Error("Failed to load car data: " + carsResponse.status);
+      }
+
+      this.stageData = await stagesResponse.json();
+      this.carsData = await carsResponse.json();
     } catch (error) {
-      console.error("Error loading stage data:", error);
+      console.error("Error loading reference data:", error);
     }
   },
 
@@ -99,6 +110,20 @@ const app = createApp({
 
     stageResults() {
       return this.results.filter(r => r.country === this.selectedCountry)
+    },
+
+    carGroups() {
+      const groups = [];
+      for (const car of this.carsData) {
+        let group = groups.find(g => g.name === car.group);
+        if(!group) {
+          group = {name: car.group, cars: []};
+          groups.push(group);
+        }
+        group.cars.push(car);
+      }
+
+      return groups;
     }
   },
 
