@@ -50,7 +50,7 @@ const app = createApp({
 
       // logged stage results - separate from events and feeds stage times table
       results: [
-        { country: "Belgium", stage: "Mettet Circuit", time: "1:24.6", conditions: "Dry", pb: true }
+        { country: "Belgium", stage: "Mettet Circuit", time: "1:24.6", conditions: "Clear", pb: true }
       ],
 
       // data for result modal

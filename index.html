@@ -135,7 +135,7 @@
               <div class="col-6">
                 <div class="form-floating">
                   <select class="form-select form-select-lg h-100 fs-6" id="eventCountrySelect"
-                    v-model="eventForm.country" @change="eventForm.stage" aria-label="Large select for event country">
+                    v-model="eventForm.country" @change="eventForm.stage = null" aria-label="Large select for event country">
                     <option :value="null" disabled>Choose a country</option>
                     <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
                   </select>
@@ -239,7 +239,7 @@
             </h2>
             <div class="progress rounded-0">
               <div class="progress-bar" role="progressbar" v-bind:style="{width: event.progress + '%'}"
-                aria-valuenow="{{event.progress}}" aria-valuemin="0" aria-valuemax="100"></div>
+                aria-valuenow="event.progress" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div v-bind:id="'event-' + index" class="accordion-collapse collapse" data-bs-parent="#eventsAccordion">
               <div class="accordion-body">
@@ -267,7 +267,7 @@
 
         </div>
         <div class="col-lg-4 align-self-start">
-          <button type="button" class="btn btn-custom w-100 py-5" data-bs-toggle="modal" data-bs-target="#eventsModal"
+          <button type="button" class="btn btn-custom w-100 py-5 fs-4" data-bs-toggle="modal" data-bs-target="#eventsModal"
             @click="startAddEvent">+
             Add Event</button>
         </div>
