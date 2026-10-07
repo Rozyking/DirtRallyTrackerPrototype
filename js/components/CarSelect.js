@@ -33,4 +33,4 @@ const CarSelect = {
       <div class="invalid-feedback">{{ error }}</div>
     </div>
     `
-}
+};

@@ -33,7 +33,7 @@ const app = createApp({
           nextStage: "Mount Kaye Pass",
           progress: 40,
           results: [
-            { stage: "Mount Kaye Pass", position: 4, time: "3:58.223", weather: "Clear", pb: true }
+            { stage: "Mount Kaye Pass", position: 4, time: "3:58.223", conditions: "Clear", pb: true }
           ]
         },
         {
@@ -58,7 +58,7 @@ const app = createApp({
         stage: null,
         position: null,
         date: null,
-        weather: null,
+        conditions: null,
         time: null,
         notes: "",
         pb: false,
@@ -161,7 +161,7 @@ const app = createApp({
     },
 
     startAddResult() {
-      this.resultForm = { stage: null, position: null, date: null, weather: null, time: null, notes: "", pb: false, country: this.selectedCountry, car: null };
+      this.resultForm = { stage: null, position: null, date: null, conditions: null, time: null, notes: "", pb: false, country: this.selectedCountry, car: null };
       this.lockResultContext = false;
       this.activeEventIndex = null;
     },
@@ -203,7 +203,7 @@ const app = createApp({
         stage: this.resultForm.stage,
         car: this.resultForm.car,
         time: this.resultForm.time,
-        conditions: this.resultForm.weather,
+        conditions: this.resultForm.conditions,
         pb: this.resultForm.pb,
         date: this.resultForm.date,
         position: this.resultForm.position
@@ -212,11 +212,13 @@ const app = createApp({
       if (this.activeEventIndex !== null) {
         const event = this.events[this.activeEventIndex];
         event.results.push(entry);
-        event.progress = (event.results.length / event.stageCount) * 100;
+        if (event.stageCount) {
+          event.progress = Math.min(100, (event.results.length / event.stageCount) * 100);
+        }
       }
 
       this.results.push(entry);
-      this.resultForm = { stage: null, position: null, date: null, weather: null, time: null, notes: "", pb: false, country: null, car: null };
+      this.resultForm = { stage: null, position: null, date: null, conditions: null, time: null, notes: "", pb: false, country: null, car: null };
       this.lockResultContext = false;
       this.activeEventIndex = null;
     },
@@ -240,11 +242,11 @@ const app = createApp({
         stage: event.nextStage,
         position: null,
         date: null,
-        weather: null,
+        conditions: null,
         time: null,
         notes: "",
         pb: false,
-        country: event.country,   // this was missing
+        country: event.country,
         car: event.car
       };
       this.selectedCountry = event.country;

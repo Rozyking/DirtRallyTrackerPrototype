@@ -31,4 +31,4 @@ const StageSelect = {
       <div class="invalid-feedback">{{ error }}</div>
     </div>
     `
-}
+};

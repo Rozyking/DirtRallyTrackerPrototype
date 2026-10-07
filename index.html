@@ -70,16 +70,16 @@
             <div class="row mb-3">
               <div class="col-6">
                 <div class="form-floating">
-                  <select class="form-select form-select-sm h-100 fs-6 mb-3" id="weatherSelect"
-                    v-model="resultForm.weather" aria-label="Small select for weather">
-                    <option :value="null" disabled>Choose weather</option>
+                  <select class="form-select form-select-sm h-100 fs-6 mb-3" id="conditionsSelect"
+                    v-model="resultForm.conditions" aria-label="Small select for conditions">
+                    <option :value="null" disabled>Choose conditions</option>
                     <option value="Clear">Clear/Sunny</option>
                     <option value="Cloudy">Cloudy</option>
                     <option value="Drizzle">Drizzle/Light rain</option>
                     <option value="Heavy">Heavy rain</option>
                     <option value="Night">Night</option>
                   </select>
-                  <label for="weatherSelect">Weather</label>
+                  <label for="conditionsSelect">Conditions</label>
                 </div>
               </div>
               <div class="form-floating col-6">
