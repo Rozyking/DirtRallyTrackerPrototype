@@ -14,84 +14,86 @@
     rel="stylesheet">
 </head>
 
-<body id="app">
-  <header>
-    <!-- Hero -->
-    <div class="hero text-center bg-image">
-      <div class="mask h-100" style="background-color: rgba(0, 0, 0, 0.6);">
-        <div class="d-flex justify-content-center align-items-center h-100">
-          <div class="text-white">
-            <h1>Dirt Rally 2.0 Tracker</h1>
+<body>
+  <div id="app">
+    <header>
+      <!-- Hero -->
+      <div class="hero text-center bg-image">
+        <div class="mask h-100" style="background-color: rgba(0, 0, 0, 0.6);">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+              <h1>Dirt Rally 2.0 Tracker</h1>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Results modal uses BaseModal component -->
-  <base-modal :show="showResultModal" title="Enter Result" @close="showResultModal = false">
-    <result-form id-prefix="modal" :initial-values="resultDefaults" :countries="countries" :stage-data="stageData"
-      :car-groups="carGroups" :lock-context="lockResultContext" @save="addResult" @cancel="showResultModal = false">
-    </result-form>
-  </base-modal>
+    <!-- Results modal uses BaseModal component -->
+    <base-modal :show="showResultModal" title="Enter Result" @close="showResultModal = false">
+      <result-form id-prefix="modal" :initial-values="resultDefaults" :countries="countries" :stage-data="stageData"
+        :car-groups="carGroups" :lock-context="lockResultContext" @save="addResult" @cancel="showResultModal = false">
+      </result-form>
+    </base-modal>
 
-  <!-- Events Modal uses BaseModal component -->
-  <event-form-modal :show="showEventModal" :event="eventBeingEdited" :countries="countries" :stage-data="stageData"
-    :car-groups="carGroups" @save="saveEvent" @close="showEventModal = false">
-  </event-form-modal>
+    <!-- Events Modal uses BaseModal component -->
+    <event-form-modal :show="showEventModal" :event="eventBeingEdited" :countries="countries" :stage-data="stageData"
+      :car-groups="carGroups" @save="saveEvent" @close="showEventModal = false">
+    </event-form-modal>
 
-  <main class="bg-light pb-5">
-    <!-- Main container for all page content -->
-    <div class="container pb-5">
-      <div class="text-center pt-3 mb-3">
-        <h2>Events</h2>
-      </div>
-      <!-- First row: Current events & add event button -->
-      <div class="row align-items-center my-3">
-        <!-- Current Events table component - Format buttons for adding events to the right on desktop, underneath on mobile -->
-        <event-list class="col-lg-8 mb-3" :events="events" @edit="editEvent" @delete="deleteEvent"
-          @add-result="prefillResultForEvent">
-        </event-list>
-
-        <div class="col-lg-4 align-self-start">
-          <button type="button" class="btn btn-custom w-100 py-5 fs-4" @click="startAddEvent">
-            Add</button>
+    <main class="bg-light pb-5">
+      <!-- Main container for all page content -->
+      <div class="container pb-5">
+        <div class="text-center pt-3 mb-3">
+          <h2>Events</h2>
         </div>
-      </div>
-      <!-- Second row: Stages and Statistics -->
-      <div class="row pb-4">
-        <div class="col-lg-6 mt-4">
-          <h2 class="text-center mt-3 mb-2">Stage Times</h2>
-          <!-- CountrySelect component -->
-          <country-select id="countrySelect" v-model="selectedCountry" :countries="countries" label="Country"
-            placeholder="Choose a country to view times" allow-clear class="mb-3">
-          </country-select>
+        <!-- First row: Current events & add event button -->
+        <div class="row align-items-center my-3">
+          <!-- Current Events table component - Format buttons for adding events to the right on desktop, underneath on mobile -->
+          <event-list class="col-lg-8 mb-3" :events="events" @edit="editEvent" @delete="deleteEvent"
+            @add-result="prefillResultForEvent">
+          </event-list>
 
-          <!-- Stage times table component -->
-          <stage-times-table :results="stageResults" :selected-country="selectedCountry" :selected-stage="selectedStage"
-            @select-stage="selectedStage = $event" @delete-result="deleteResult">
-          </stage-times-table>
-
-          <button type="button" class="btn btn-custom w-100 py-3" @click="toggleInlineForm">
-            {{ showInlineForm ? "Close" : "Add" }}
-          </button>
-          <div v-if="showInlineForm" class="card card-body mt-3">
-            <result-form id-prefix="inline" :initial-values="{ country: selectedCountry }" :countries="countries"
-              :stage-data="stageData" :car-groups="carGroups" @save="addResult" @cancel="showInlineForm = false">
-            </result-form>
+          <div class="col-lg-4 align-self-start">
+            <button type="button" class="btn btn-custom w-100 py-5 fs-4" @click="startAddEvent">
+              Add</button>
           </div>
         </div>
-        <div class="col-lg-6 mt-4">
-          <h2 class="text-center mt-3 mb-2">Stage Chart</h2>
-          <!-- Chart.js component -->
-          <stage-chart :results="stageResults" :selected-stage="selectedStage"></stage-chart>
+        <!-- Second row: Stages and Statistics -->
+        <div class="row pb-4">
+          <div class="col-lg-6 mt-4">
+            <h2 class="text-center mt-3 mb-2">Stage Times</h2>
+            <!-- CountrySelect component -->
+            <country-select id="countrySelect" v-model="selectedCountry" :countries="countries" label="Country"
+              placeholder="Choose a country to view times" allow-clear class="mb-3">
+            </country-select>
+
+            <!-- Stage times table component -->
+            <stage-times-table :results="stageResults" :selected-country="selectedCountry"
+              :selected-stage="selectedStage" @select-stage="selectedStage = $event" @delete-result="deleteResult">
+            </stage-times-table>
+
+            <button type="button" class="btn btn-custom w-100 py-3" @click="toggleInlineForm">
+              {{ showInlineForm ? "Close" : "Add" }}
+            </button>
+            <div v-if="showInlineForm" class="card card-body mt-3">
+              <result-form id-prefix="inline" :initial-values="{ country: selectedCountry }" :countries="countries"
+                :stage-data="stageData" :car-groups="carGroups" @save="addResult" @cancel="showInlineForm = false">
+              </result-form>
+            </div>
+          </div>
+          <div class="col-lg-6 mt-4">
+            <h2 class="text-center mt-3 mb-2">Stage Chart</h2>
+            <!-- Chart.js component -->
+            <stage-chart :results="stageResults" :selected-stage="selectedStage"></stage-chart>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
-  <footer class="text-center">
-    <p class="p-5 m-0">&copy; Zane Robe - 2026 - Dirt Rally 2.0 Tracker</p>
-  </footer>
+    </main>
+    <footer class="text-center">
+      <p class="p-5 m-0">&copy; Zane Robe - 2026 - Dirt Rally 2.0 Tracker</p>
+    </footer>
+  </div>
   <!-- Loads the latest global build of Vue 3 -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
