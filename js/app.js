@@ -24,7 +24,8 @@ const app = createApp({
           place: "12th Place",
           country: "Belgium",
           nextStage: "Mettet Circuit",
-          progress: 65,
+          stageCount: 6,
+          progress: 0,
           results: []
         },
         {
@@ -34,7 +35,8 @@ const app = createApp({
           place: "4th Place",
           country: "Australia",
           nextStage: "Mount Kaye Pass",
-          progress: 40,
+          stageCount: 6,
+          progress: 17,
           results: [
             { stage: "Mount Kaye Pass", position: 4, time: "3:58.223", conditions: "Clear", pb: true }
           ]
@@ -46,7 +48,8 @@ const app = createApp({
           place: "321st Place",
           country: "Argentina",
           nextStage: "La Merced",
-          progress: 80,
+          stageCount: 6,
+          progress: 0,
           results: []
         }
       ],
@@ -56,18 +59,7 @@ const app = createApp({
         { country: "Belgium", stage: "Mettet Circuit", time: "1:24.634", conditions: "Clear", pb: true }
       ],
 
-      // data for result modal
-      resultForm: {
-        stage: null,
-        position: null,
-        date: null,
-        conditions: null,
-        time: null,
-        notes: "",
-        pb: false,
-        country: null,
-        car: null
-      },
+      resultDefaults: {},
       lockResultContext: false,
       activeEventIndex: null,
     };
@@ -124,9 +116,6 @@ const app = createApp({
       return groups;
     },
 
-    resultModalStages() {
-      return this.stageData[this.resultForm.country] || [];
-    }
   },
 
   // usually event triggered by v-on/@click
@@ -149,7 +138,7 @@ const app = createApp({
     },
 
     startAddResult() {
-      this.resultForm = { stage: null, position: null, date: null, conditions: null, time: null, notes: "", pb: false, country: this.selectedCountry, car: null };
+      this.resultDefaults = { country: this.selectedCountry };
       this.lockResultContext = false;
       this.activeEventIndex = null;
       this.showResultModal = true;
@@ -167,7 +156,7 @@ const app = createApp({
       };
 
       if (this.editingIndex !== null) {
-        this.events[this.editingIndex] = { ...this.events[this.editingIndex], ...fields};
+        this.events[this.editingIndex] = { ...this.events[this.editingIndex], ...fields };
       } else {
         this.events.push({ ...fields, place: "1st Place", progress: 0, results: [] });
       }
@@ -177,16 +166,17 @@ const app = createApp({
       this.showEventModal = false;
     },
 
-    addResult() {
+    addResult(formData) {
       const entry = {
-        country: this.resultForm.country,
-        stage: this.resultForm.stage,
-        car: this.resultForm.car,
-        time: this.resultForm.time,
-        conditions: this.resultForm.conditions,
-        pb: this.resultForm.pb,
-        date: this.resultForm.date,
-        position: this.resultForm.position
+        country: formData.country,
+        stage: formData.stage,
+        car: formData.car,
+        time: formData.time,
+        conditions: formData.conditions,
+        pb: formData.pb,
+        date: formData.date,
+        position: formData.position,
+        notes: formData.notes
       };
 
       if (this.activeEventIndex !== null) {
@@ -198,7 +188,6 @@ const app = createApp({
       }
 
       this.results.push(entry);
-      this.resultForm = { stage: null, position: null, date: null, conditions: null, time: null, notes: "", pb: false, country: null, car: null };
       this.lockResultContext = false;
       this.activeEventIndex = null;
       this.showResultModal = false;
@@ -211,15 +200,9 @@ const app = createApp({
     },
 
     prefillResultForEvent(event, index) {
-      this.resultForm = {
-        stage: event.nextStage,
-        position: null,
-        date: null,
-        conditions: null,
-        time: null,
-        notes: "",
-        pb: false,
+      this.resultDefaults = {
         country: event.country,
+        stage: event.nextStage,
         car: event.car
       };
       this.selectedCountry = event.country;
@@ -236,6 +219,7 @@ app.component("stage-select", StageSelect);
 app.component("car-select", CarSelect);
 app.component("base-modal", BaseModal);
 app.component("event-form-modal", EventFormModal);
+app.component("result-form", ResultForm);
 
 app.mount("#app");
 
