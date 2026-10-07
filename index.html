@@ -71,7 +71,7 @@
             <div class="row mb-3">
               <div class="form-floating col-4">
                 <input type="number" class="form-control" id="floatingPosition" placeholder="20" min="1"
-                  v-model="resultForm.position">
+                  v-model.number="resultForm.position">
                 <label for="floatingPosition" class="ms-2">Position</label>
               </div>
               <div class="form-floating col-8">
@@ -205,7 +205,7 @@
               </div>
               <div class="form-floating col-4">
                 <input type="number" class="form-control" id="floatingRaceNumber" placeholder="6" min="1"
-                  v-model="eventForm.stageCount">
+                  v-model.number="eventForm.stageCount">
                 <label for="floatingRaceNumber" class="ms-2"># of stages</label>
               </div>
             </div>
@@ -311,7 +311,7 @@
             </tbody>
           </table>
           <button type="button" class="btn btn-custom w-100 py-3" data-bs-toggle="modal" data-bs-target="#resultsModal"
-            @click="prefillResultForEvent(event, index)">+ Add
+            @click="startAddResult()">+ Add
           Result</button>
         </div>
         <div class="col-lg-6 mt-4">

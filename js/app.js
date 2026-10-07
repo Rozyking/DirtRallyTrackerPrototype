@@ -175,7 +175,9 @@ const app = createApp({
           rank: this.eventForm.rank,
           car: this.eventForm.car,
           country: this.eventForm.country,
-          nextStage: this.eventForm.stage
+          nextStage: this.eventForm.stage,
+          date: this.eventForm.date,
+          stageCount: this.eventForm.stageCount
         };
       } else {
         this.events.push({
@@ -185,6 +187,8 @@ const app = createApp({
           place: "1st Place",
           country: this.eventForm.country,
           nextStage: this.eventForm.stage,
+          date: this.eventForm.date,
+          stageCount: this.eventForm.stageCount,
           progress: 0,
           results: []
         });
@@ -200,13 +204,15 @@ const app = createApp({
         car: this.resultForm.car,
         time: this.resultForm.time,
         conditions: this.resultForm.weather,
-        pb: this.resultForm.pb
+        pb: this.resultForm.pb,
+        date: this.resultForm.date,
+        position: this.resultForm.position
       };
 
       if (this.activeEventIndex !== null) {
         const event = this.events[this.activeEventIndex];
         event.results.push(entry);
-        event.progress = Math.min(100, event.progress + 10);
+        event.progress = (event.results.length / event.stageCount) * 100;
       }
 
       this.results.push(entry);
@@ -218,11 +224,11 @@ const app = createApp({
     editEvent(index) {
       const event = this.events[index];
       this.eventForm = {
-        date: null,
+        date: event.date ?? null,
         rank: event.rank,
         car: event.car,
         type: event.name,
-        stageCount: null,
+        stageCount: event.stageCount ?? null,
         country: event.country,
         stage: event.nextStage
       };
