@@ -199,7 +199,7 @@ const app = createApp({
 
     addResult() {
       const entry = {
-        country: this.selectedCountry,
+        country: this.resultForm.country,
         stage: this.resultForm.stage,
         car: this.resultForm.car,
         time: this.resultForm.time,
@@ -236,20 +236,28 @@ const app = createApp({
     },
 
     prefillResultForEvent(event, index) {
+      this.resultForm = {
+        stage: event.nextStage,
+        position: null,
+        date: null,
+        weather: null,
+        time: null,
+        notes: "",
+        pb: false,
+        country: event.country,   // this was missing
+        car: event.car
+      };
       this.selectedCountry = event.country;
-      this.resultForm.stage = event.nextStage;
-      this.resultForm.car = event.car;
       this.lockResultContext = true;
       this.activeEventIndex = index;
-    }
+    },
   },
-
-
-
 });
 
 // Components here
 app.component("country-select", CountrySelect);
+app.component("stage-select", StageSelect);
+app.component("car-select", CarSelect);
 
 app.mount("#app");
 
