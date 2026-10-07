@@ -98,82 +98,9 @@
   </base-modal>
 
   <!-- Events Modal uses BaseModal component -->
-  <base-modal :show="showEventModal" :title="editingIndex !== null ? 'Edit Event' : 'Enter Event'"
-    @close="showEventModal = false">
-    <form>
-      <div class="row mb-3">
-
-        <div class="col-6">
-          <!-- CountrySelect component -->
-          <country-select id="eventCountrySelect" v-model="eventForm.country"
-            @update:model-value="eventForm.stage = null" :countries="countries" placeholder="Choose a country">
-          </country-select>
-        </div>
-
-        <div class="col-6">
-          <!-- StageSelect component -->
-          <stage-select id="eventStageSelect" v-model="eventForm.stage" :stages="eventCountryStages"
-            :disabled="!eventForm.country" label="Next Stage">
-          </stage-select>
-        </div>
-
-      </div>
-      <div class="row mb-3">
-        <div class="form-floating col-7">
-          <input type="date" class="form-control" id="floatingEventDateInput" placeholder="01/01/2000"
-            v-model="eventForm.date">
-          <label for="floatingEventDateInput" class="ms-2">Date started</label>
-        </div>
-        <div class="col-5">
-          <div class="form-floating">
-            <select class="form-select form-select-sm h-100 fs-6" id="rankSelect" v-model="eventForm.rank"
-              aria-label="Small select for rank">
-              <option :value="null" disabled>Choose rank</option>
-              <option value="Time-trials">Time Trials</option>
-              <option value="Open">Open</option>
-              <option value="Clubman">Clubman</option>
-              <option value="Semi-Pro">Semi-Pro</option>
-              <option value="Pro">Pro</option>
-              <option value="Elite">Elite</option>
-            </select>
-            <label for="rankSelect">Rank</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- CarSelect component -->
-      <car-select id="carSelect" v-model="eventForm.car" :car-groups="carGroups" class="mb-3">
-      </car-select>
-
-      <div class="row mb-3">
-        <div class="col-8">
-          <div class="form-floating">
-            <select class="form-select form-select-lg h-100 fs-6 mb-3" id="eventSelect" v-model="eventForm.type"
-              aria-label="large select for event type">
-              <option :value="null" disabled>Choose event</option>
-              <option value="Career Rally">Career Rally</option>
-              <option value="Career Rallycross">Career Rallycross</option>
-              <option value="Daily Challenge">Daily Challenge</option>
-              <option value="Weekly Challenge">Weekly Challenge</option>
-              <option value="Monthly Challenge">Monthly Challenge</option>
-              <option value="Daily AI Challenge">Daily AI Challenge</option>
-              <option value="Weekly AI Challenge">Weekly AI Challenge</option>
-              <option value="Monthly AI Challenge">Monthly AI Challenge</option>
-            </select>
-            <label for="eventSelect">Event type</label>
-          </div>
-        </div>
-        <div class="form-floating col-4">
-          <input type="number" class="form-control" id="floatingRaceNumber" placeholder="6" min="1"
-            v-model.number="eventForm.stageCount">
-          <label for="floatingRaceNumber" class="ms-2"># of stages</label>
-        </div>
-      </div>
-    </form>
-    <template #footer>
-      <button type="button" class="btn btn-custom" @click="saveEvent">Save Event</button>
-    </template>
-  </base-modal>
+  <event-form-modal :show="showEventModal" :event="eventBeingEdited" :countries="countries" :stage-data="stageData"
+    :car-groups="carGroups" @save="saveEvent" @close="showEventModal = false">
+  </event-form-modal>
 
   <main class="bg-light pb-5">
     <!-- Main container for all page content -->
@@ -292,6 +219,7 @@
   <script src="js/components/StageSelect.js"></script>
   <script src="js/components/CarSelect.js"></script>
   <script src="js/components/BaseModal.js"></script>
+  <script src="js/components/EventFormModal.js"></script>
 
   <script src="js/app.js"></script>
 </body>

@@ -11,6 +11,7 @@ const app = createApp({
       selectedCountry: null,
       selectedStage: null,
       editingIndex: null,
+      eventBeingEdited: null,
       showEventModal: false,
       showResultModal: false,
 
@@ -69,18 +70,6 @@ const app = createApp({
       },
       lockResultContext: false,
       activeEventIndex: null,
-
-      // data for events modal
-      eventForm: {
-        date: null,
-        rank: null,
-        car: null,
-        type: null,
-        stageCount: null,
-        country: null,
-        stage: null
-      }
-
     };
   },
 
@@ -135,10 +124,6 @@ const app = createApp({
       return groups;
     },
 
-    eventCountryStages() {
-      return this.stageData[this.eventForm.country] || [];
-    },
-
     resultModalStages() {
       return this.stageData[this.resultForm.country] || [];
     }
@@ -158,7 +143,7 @@ const app = createApp({
     },
 
     startAddEvent() {
-      this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null, country: null, stage: null };
+      this.eventBeingEdited = null;
       this.editingIndex = null;
       this.showEventModal = true;
     },
@@ -170,34 +155,24 @@ const app = createApp({
       this.showResultModal = true;
     },
 
-    saveEvent() {
+    saveEvent(formData) {
+      const fields = {
+        name: formData.type,
+        rank: formData.rank,
+        car: formData.car,
+        country: formData.country,
+        nextStage: formData.stage,
+        date: formData.date,
+        stageCount: formData.stageCount
+      };
+
       if (this.editingIndex !== null) {
-        const existing = this.events[this.editingIndex];
-        this.events[this.editingIndex] = {
-          ...existing,
-          name: this.eventForm.type,
-          rank: this.eventForm.rank,
-          car: this.eventForm.car,
-          country: this.eventForm.country,
-          nextStage: this.eventForm.stage,
-          date: this.eventForm.date,
-          stageCount: this.eventForm.stageCount
-        };
+        this.events[this.editingIndex] = { ...this.events[this.editingIndex], ...fields};
       } else {
-        this.events.push({
-          name: this.eventForm.type,
-          rank: this.eventForm.rank,
-          car: this.eventForm.car,
-          place: "1st Place",
-          country: this.eventForm.country,
-          nextStage: this.eventForm.stage,
-          date: this.eventForm.date,
-          stageCount: this.eventForm.stageCount,
-          progress: 0,
-          results: []
-        });
+        this.events.push({ ...fields, place: "1st Place", progress: 0, results: [] });
       }
-      this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null, country: null, stage: null };
+
+      this.eventBeingEdited = null;
       this.editingIndex = null;
       this.showEventModal = false;
     },
@@ -230,16 +205,7 @@ const app = createApp({
     },
 
     editEvent(index) {
-      const event = this.events[index];
-      this.eventForm = {
-        date: event.date ?? null,
-        rank: event.rank,
-        car: event.car,
-        type: event.name,
-        stageCount: event.stageCount ?? null,
-        country: event.country,
-        stage: event.nextStage
-      };
+      this.eventBeingEdited = this.events[index];
       this.editingIndex = index;
       this.showEventModal = true;
     },
@@ -269,6 +235,7 @@ app.component("country-select", CountrySelect);
 app.component("stage-select", StageSelect);
 app.component("car-select", CarSelect);
 app.component("base-modal", BaseModal);
+app.component("event-form-modal", EventFormModal);
 
 app.mount("#app");
 
