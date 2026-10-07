@@ -14,10 +14,12 @@ const app = createApp({
       eventBeingEdited: null,
       showEventModal: false,
       showResultModal: false,
+      nextEventId: 4,
 
       // holds data for accordion blocks with event data
       events: [
         {
+          id: 1,
           name: "Career Rallycross",
           rank: "Clubman",
           car: "Ford Fiesta R5",
@@ -29,6 +31,7 @@ const app = createApp({
           results: []
         },
         {
+          id: 2,
           name: "Career Rally",
           rank: "Semi-Pro",
           car: "Subaru Impreza 1995",
@@ -42,6 +45,7 @@ const app = createApp({
           ]
         },
         {
+          id: 3,
           name: "Weekly Challenge",
           rank: "Pro",
           car: "Ford Escort Mk II",
@@ -158,7 +162,7 @@ const app = createApp({
       if (this.editingIndex !== null) {
         this.events[this.editingIndex] = { ...this.events[this.editingIndex], ...fields };
       } else {
-        this.events.push({ ...fields, place: "1st Place", progress: 0, results: [] });
+        this.events.push({ ...fields, id: this.nextEventId++, place: "1st Place", progress: 0, results: [] });
       }
 
       this.eventBeingEdited = null;
@@ -220,6 +224,8 @@ app.component("car-select", CarSelect);
 app.component("base-modal", BaseModal);
 app.component("event-form-modal", EventFormModal);
 app.component("result-form", ResultForm);
+app.component("event-item", EventItem);
+app.component("event-list", EventList);
 
 app.mount("#app");
 
