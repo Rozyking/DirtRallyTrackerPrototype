@@ -15,6 +15,7 @@ const app = createApp({
       showEventModal: false,
       showResultModal: false,
       nextEventId: 4,
+      showInlineForm: false,
 
       // holds data for accordion blocks with event data
       events: [
@@ -98,10 +99,6 @@ const app = createApp({
       return Object.keys(this.stageData);
     },
 
-    filteredStages() {
-      return this.stageData[this.selectedCountry] || [];
-    },
-
     stageResults() {
       return this.results.filter(r => r.country === this.selectedCountry)
     },
@@ -148,11 +145,9 @@ const app = createApp({
       this.showEventModal = true;
     },
 
-    startAddResult() {
-      this.resultDefaults = { country: this.selectedCountry };
-      this.lockResultContext = false;
+    toggleInlineForm() {
+      this.showInlineForm = !this.showInlineForm;
       this.activeEventIndex = null;
-      this.showResultModal = true;
     },
 
     saveEvent(formData) {
@@ -198,6 +193,8 @@ const app = createApp({
         }
       }
 
+      if (this.activeEventIndex === null) this.showInlineForm = false;
+
       this.results.push(entry);
       this.lockResultContext = false;
       this.activeEventIndex = null;
@@ -234,6 +231,7 @@ app.component("result-form", ResultForm);
 app.component("event-item", EventItem);
 app.component("event-list", EventList);
 app.component("stage-times-table", StageTimesTable);
+app.component("stage-chart", StageChart);
 
 app.mount("#app");
 

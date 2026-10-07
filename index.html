@@ -71,21 +71,20 @@
           <stage-times-table :results="stageResults" :selected-country="selectedCountry" :selected-stage="selectedStage"
             @select-stage="selectedStage = $event" @delete-result="deleteResult">
           </stage-times-table>
-          
-          <button type="button" class="btn btn-custom w-100 py-3" @click="startAddResult()">+ Add
-            Result</button>
+
+          <button type="button" class="btn btn-custom w-100 py-3" @click="toggleInlineForm">
+            {{ showInlineForm ? "Close" : "Add" }}
+          </button>
+          <div v-if="showInlineForm" class="card card-body mt-3">
+            <result-form id-prefix="inline" :initial-values="{ country: selectedCountry }" :countries="countries"
+              :stage-data="stageData" :car-groups="carGroups" @save="addResult" @cancel="showInlineForm = false">
+            </result-form>
+          </div>
         </div>
         <div class="col-lg-6 mt-4">
           <h2 class="text-center mt-3 mb-2">Stage Chart</h2>
-          <div class="form-floating">
-            <select class="form-select form-select-lg mb-3 h-100" id="stageSelect" v-model="selectedStage"
-              :disabled="!selectedCountry" aria-label="Large select for stages" disabled>
-              <option v-bind:value="null" disabled>Choose a stage</option>
-              <option v-for="stage in filteredStages" :key="stage" :value="stage">{{stage}}</option>
-            </select>
-            <label for="stageSelect">Stage</label>
-          </div>
-          <img src="src/chart-placeholder.svg" alt="Placeholder for chart of race times">
+          <!-- Chart.js component -->
+          <stage-chart :results="stageResults" :selected-stage="selectedStage"></stage-chart>
         </div>
       </div>
     </div>
@@ -106,6 +105,10 @@
   <script src="js/components/EventItem.js"></script>
   <script src="js/components/EventList.js"></script>
   <script src="js/components/StageTimesTable.js"></script>
+
+  <!-- Chart.js cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="js/components/StageChart.js"></script>
 
   <script src="js/app.js"></script>
 </body>
