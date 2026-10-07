@@ -40,8 +40,7 @@
           <form>
             <div class="mb-3 form-floating">
               <select class="form-select form-select-lg h-100 fs-6 mb-3" id="resultCountrySelect"
-                v-model="resultForm.country" @change="resultForm.stage = null" 
-                aria-label="Large select for country">
+                v-model="resultForm.country" @change="resultForm.stage = null" aria-label="Large select for country">
                 <option :value="null" disabled>Choose a country</option>
                 <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
               </select>
@@ -135,7 +134,8 @@
               <div class="col-6">
                 <div class="form-floating">
                   <select class="form-select form-select-lg h-100 fs-6" id="eventCountrySelect"
-                    v-model="eventForm.country" @change="eventForm.stage = null" aria-label="Large select for event country">
+                    v-model="eventForm.country" @change="eventForm.stage = null"
+                    aria-label="Large select for event country">
                     <option :value="null" disabled>Choose a country</option>
                     <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
                   </select>
@@ -267,8 +267,8 @@
 
         </div>
         <div class="col-lg-4 align-self-start">
-          <button type="button" class="btn btn-custom w-100 py-5 fs-4" data-bs-toggle="modal" data-bs-target="#eventsModal"
-            @click="startAddEvent">+
+          <button type="button" class="btn btn-custom w-100 py-5 fs-4" data-bs-toggle="modal"
+            data-bs-target="#eventsModal" @click="startAddEvent">+
             Add Event</button>
         </div>
       </div>
@@ -312,7 +312,7 @@
           </table>
           <button type="button" class="btn btn-custom w-100 py-3" data-bs-toggle="modal" data-bs-target="#resultsModal"
             @click="startAddResult()">+ Add
-          Result</button>
+            Result</button>
         </div>
         <div class="col-lg-6 mt-4">
           <h2 class="text-center mt-3 mb-2">Stage Chart</h2>
@@ -337,6 +337,10 @@
     crossorigin="anonymous"></script>
   <!-- Loads the latest global build of Vue 3 -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- Components -->
+  <script src="js/components/CountrySelect.js"></script>
+
   <script src="js/app.js"></script>
 </body>
 

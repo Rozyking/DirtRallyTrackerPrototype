@@ -246,5 +246,10 @@ const app = createApp({
 
 
 
-}).mount("#app")
+});
+
+// Components here
+app.component("country-select", CountrySelect);
+
+app.mount("#app");
 
