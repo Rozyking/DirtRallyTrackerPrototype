@@ -122,6 +122,13 @@ const app = createApp({
 
   },
 
+  // Makes sure stages from previous country do not stay selected when switching countries
+  watch: {
+    selectedCountry() {
+      this.selectedStage = null;
+    }
+  },
+
   // usually event triggered by v-on/@click
   methods: {
     deleteEvent(index) {
@@ -226,6 +233,7 @@ app.component("event-form-modal", EventFormModal);
 app.component("result-form", ResultForm);
 app.component("event-item", EventItem);
 app.component("event-list", EventList);
+app.component("stage-times-table", StageTimesTable);
 
 app.mount("#app");
 

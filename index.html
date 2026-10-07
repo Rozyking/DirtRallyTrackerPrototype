@@ -48,7 +48,7 @@
       </div>
       <!-- First row: Current events & add event button -->
       <div class="row align-items-center my-3">
-        <!-- Current Events table - Format buttons for adding events to the right on desktop, underneath on mobile -->
+        <!-- Current Events table component - Format buttons for adding events to the right on desktop, underneath on mobile -->
         <event-list class="col-lg-8 mb-3" :events="events" @edit="editEvent" @delete="deleteEvent"
           @add-result="prefillResultForEvent">
         </event-list>
@@ -66,32 +66,12 @@
           <country-select id="countrySelect" v-model="selectedCountry" :countries="countries" label="Country"
             placeholder="Choose a country to view times" allow-clear class="mb-3">
           </country-select>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Stage</th>
-                <th scope="col">Time</th>
-                <th scope="col">Conditions</th>
-                <th scope="col">PB</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody id="stageTableBody">
-              <tr v-for="(result, index) in stageResults" :key="index">
-                <td>{{result.stage}}</td>
-                <td>{{result.time}}</td>
-                <td>{{result.conditions}}</td>
-                <td>{{result.pb ? "⭐" : ""}}</td>
-                <td><i class="bi bi-trash" role="button" @click="deleteResult(result)"></i></td>
-              </tr>
-              <tr v-if="!selectedCountry">
-                <td colspan="5" class="text-center text-muted">Choose a country to see stage times</td>
-              </tr>
-              <tr v-else-if="stageResults.length === 0">
-                <td colspan="5" class="text-center text-muted">No data available</td>
-              </tr>
-            </tbody>
-          </table>
+
+          <!-- Stage times table component -->
+          <stage-times-table :results="stageResults" :selected-country="selectedCountry" :selected-stage="selectedStage"
+            @select-stage="selectedStage = $event" @delete-result="deleteResult">
+          </stage-times-table>
+          
           <button type="button" class="btn btn-custom w-100 py-3" @click="startAddResult()">+ Add
             Result</button>
         </div>
@@ -125,6 +105,7 @@
   <script src="js/components/ResultForm.js"></script>
   <script src="js/components/EventItem.js"></script>
   <script src="js/components/EventList.js"></script>
+  <script src="js/components/StageTimesTable.js"></script>
 
   <script src="js/app.js"></script>
 </body>
