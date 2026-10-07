@@ -28,171 +28,152 @@
     </div>
   </header>
 
-  <!-- Results modal -->
-  <div class="modal" id="resultsModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Enter Result</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <!-- Results modal uses BaseModal component -->
+  <base-modal :show="showResultModal" title="Enter Result" @close="showResultModal = false">
+    <form>
+      <!-- CountrySelect component -->
+      <country-select id="resultCountrySelect" v-model="resultForm.country"
+        @update:model-value="resultForm.stage = null" :countries="countries" label="Country"
+        placeholder="Choose a country" class="mb-3">
+      </country-select>
+
+      <!-- StageSelect component -->
+      <stage-select id="resultStage" v-model="resultForm.stage" :stages="resultModalStages"
+        :disabled="!resultForm.country" class="mb-3">
+      </stage-select>
+
+      <!-- CarSelect component -->
+      <car-select id="resultCarSelect" v-model="resultForm.car" :car-groups="carGroups" :disabled="lockResultContext"
+        class="mb-3">
+      </car-select>
+
+      <div class="row mb-3">
+        <div class="form-floating col-4">
+          <input type="number" class="form-control" id="floatingPosition" placeholder="20" min="1"
+            v-model.number="resultForm.position">
+          <label for="floatingPosition" class="ms-2">Position</label>
         </div>
-        <div class="modal-body">
-          <form>
-            <!-- CountrySelect component -->
-            <country-select id="resultCountrySelect" v-model="resultForm.country"
-              @update:model-value="resultForm.stage = null" :countries="countries" label="Country"
-              placeholder="Choose a country" class="mb-3">
-            </country-select>
-
-            <!-- StageSelect component -->
-            <stage-select id="resultStage" v-model="resultForm.stage" :stages="resultModalStages"
-              :disabled="!resultForm.country" class="mb-3">
-            </stage-select>
-
-            <!-- CarSelect component -->
-            <car-select id="resultCarSelect" v-model="resultForm.car" :car-groups="carGroups"
-              :disabled="lockResultContext" class="mb-3">
-            </car-select>
-
-            <div class="row mb-3">
-              <div class="form-floating col-4">
-                <input type="number" class="form-control" id="floatingPosition" placeholder="20" min="1"
-                  v-model.number="resultForm.position">
-                <label for="floatingPosition" class="ms-2">Position</label>
-              </div>
-              <div class="form-floating col-8">
-                <input type="date" class="form-control" id="floatingDateInput" placeholder="01/01/2000"
-                  v-model="resultForm.date">
-                <label for="floatingDateInput" class="ms-2">Result Date</label>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <div class="col-6">
-                <div class="form-floating">
-                  <select class="form-select form-select-sm h-100 fs-6 mb-3" id="conditionsSelect"
-                    v-model="resultForm.conditions" aria-label="Small select for conditions">
-                    <option :value="null" disabled>Choose conditions</option>
-                    <option value="Clear">Clear/Sunny</option>
-                    <option value="Cloudy">Cloudy</option>
-                    <option value="Drizzle">Drizzle/Light rain</option>
-                    <option value="Heavy">Heavy rain</option>
-                    <option value="Night">Night</option>
-                  </select>
-                  <label for="conditionsSelect">Conditions</label>
-                </div>
-              </div>
-              <div class="form-floating col-6">
-                <input type="text" class="form-control" id="floatingTimeInput" placeholder="3:58.223"
-                  v-model="resultForm.time">
-                <label for="floatingTimeInput" class="ms-2">Time (mm:ss.fff)</label>
-              </div>
-            </div>
-
-            <div class="form-floating mb-3">
-              <textarea class="form-control" placeholder="Race notes" id="floatingTextareaNotes"
-                v-model="resultForm.notes"></textarea>
-              <label for="floatingTextareaNotes">Notes</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="resultPB" v-model="resultForm.pb">
-              <label class="form-check-label" for="resultPB">Personal best</label>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-custom" @click="addResult" data-bs-dismiss="modal">Save results</button>
+        <div class="form-floating col-8">
+          <input type="date" class="form-control" id="floatingDateInput" placeholder="01/01/2000"
+            v-model="resultForm.date">
+          <label for="floatingDateInput" class="ms-2">Result Date</label>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Events Modal -->
-  <div class="modal" id="eventsModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{{ editingIndex !== null ? "Edit Event" : "Enter Event" }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="row mb-3">
+        <div class="col-6">
+          <div class="form-floating">
+            <select class="form-select form-select-sm h-100 fs-6 mb-3" id="conditionsSelect"
+              v-model="resultForm.conditions" aria-label="Small select for conditions">
+              <option :value="null" disabled>Choose conditions</option>
+              <option value="Clear">Clear/Sunny</option>
+              <option value="Cloudy">Cloudy</option>
+              <option value="Drizzle">Drizzle/Light rain</option>
+              <option value="Heavy">Heavy rain</option>
+              <option value="Night">Night</option>
+            </select>
+            <label for="conditionsSelect">Conditions</label>
+          </div>
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="row mb-3">
-
-              <div class="col-6">
-                <!-- CountrySelect component -->
-                <country-select id="eventCountrySelect" v-model="eventForm.country"
-                  @update:model-value="eventForm.stage = null" :countries="countries" placeholder="Choose a country">
-                </country-select>
-              </div>
-
-              <div class="col-6">
-                <!-- StageSelect component -->
-                <stage-select id="eventStageSelect" v-model="eventForm.stage" :stages="eventCountryStages"
-                  :disabled="!eventForm.country" label="Next Stage">
-                </stage-select>
-              </div>
-
-            </div>
-            <div class="row mb-3">
-              <div class="form-floating col-7">
-                <input type="date" class="form-control" id="floatingEventDateInput" placeholder="01/01/2000"
-                  v-model="eventForm.date">
-                <label for="floatingEventDateInput" class="ms-2">Date started</label>
-              </div>
-              <div class="col-5">
-                <div class="form-floating">
-                  <select class="form-select form-select-sm h-100 fs-6" id="rankSelect" v-model="eventForm.rank"
-                    aria-label="Small select for rank">
-                    <option :value="null" disabled>Choose rank</option>
-                    <option value="Time-trials">Time Trials</option>
-                    <option value="Open">Open</option>
-                    <option value="Clubman">Clubman</option>
-                    <option value="Semi-Pro">Semi-Pro</option>
-                    <option value="Pro">Pro</option>
-                    <option value="Elite">Elite</option>
-                  </select>
-                  <label for="rankSelect">Rank</label>
-                </div>
-              </div>
-            </div>
-
-            <!-- CarSelect component -->
-            <car-select id="carSelect" v-model="eventForm.car" :car-groups="carGroups" class="mb-3">
-            </car-select>
-
-            <div class="row mb-3">
-              <div class="col-8">
-                <div class="form-floating">
-                  <select class="form-select form-select-lg h-100 fs-6 mb-3" id="eventSelect" v-model="eventForm.type"
-                    aria-label="large select for event type">
-                    <option :value="null" disabled>Choose event</option>
-                    <option value="Career Rally">Career Rally</option>
-                    <option value="Career Rallycross">Career Rallycross</option>
-                    <option value="Daily Challenge">Daily Challenge</option>
-                    <option value="Weekly Challenge">Weekly Challenge</option>
-                    <option value="Monthly Challenge">Monthly Challenge</option>
-                    <option value="Daily AI Challenge">Daily AI Challenge</option>
-                    <option value="Weekly AI Challenge">Weekly AI Challenge</option>
-                    <option value="Monthly AI Challenge">Monthly AI Challenge</option>
-                  </select>
-                  <label for="eventSelect">Event type</label>
-                </div>
-              </div>
-              <div class="form-floating col-4">
-                <input type="number" class="form-control" id="floatingRaceNumber" placeholder="6" min="1"
-                  v-model.number="eventForm.stageCount">
-                <label for="floatingRaceNumber" class="ms-2"># of stages</label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-custom" @click="saveEvent" data-bs-dismiss="modal">Save Event</button>
+        <div class="form-floating col-6">
+          <input type="text" class="form-control" id="floatingTimeInput" placeholder="3:58.223"
+            v-model="resultForm.time">
+          <label for="floatingTimeInput" class="ms-2">Time (mm:ss.fff)</label>
         </div>
       </div>
-    </div>
-  </div>
+
+      <div class="form-floating mb-3">
+        <textarea class="form-control" placeholder="Race notes" id="floatingTextareaNotes"
+          v-model="resultForm.notes"></textarea>
+        <label for="floatingTextareaNotes">Notes</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="resultPB" v-model="resultForm.pb">
+        <label class="form-check-label" for="resultPB">Personal best</label>
+      </div>
+    </form>
+    <template #footer>
+      <button type="button" class="btn btn-custom" @click="addResult">Save results</button>
+    </template>
+  </base-modal>
+
+  <!-- Events Modal uses BaseModal component -->
+  <base-modal :show="showEventModal" :title="editingIndex !== null ? 'Edit Event' : 'Enter Event'"
+    @close="showEventModal = false">
+    <form>
+      <div class="row mb-3">
+
+        <div class="col-6">
+          <!-- CountrySelect component -->
+          <country-select id="eventCountrySelect" v-model="eventForm.country"
+            @update:model-value="eventForm.stage = null" :countries="countries" placeholder="Choose a country">
+          </country-select>
+        </div>
+
+        <div class="col-6">
+          <!-- StageSelect component -->
+          <stage-select id="eventStageSelect" v-model="eventForm.stage" :stages="eventCountryStages"
+            :disabled="!eventForm.country" label="Next Stage">
+          </stage-select>
+        </div>
+
+      </div>
+      <div class="row mb-3">
+        <div class="form-floating col-7">
+          <input type="date" class="form-control" id="floatingEventDateInput" placeholder="01/01/2000"
+            v-model="eventForm.date">
+          <label for="floatingEventDateInput" class="ms-2">Date started</label>
+        </div>
+        <div class="col-5">
+          <div class="form-floating">
+            <select class="form-select form-select-sm h-100 fs-6" id="rankSelect" v-model="eventForm.rank"
+              aria-label="Small select for rank">
+              <option :value="null" disabled>Choose rank</option>
+              <option value="Time-trials">Time Trials</option>
+              <option value="Open">Open</option>
+              <option value="Clubman">Clubman</option>
+              <option value="Semi-Pro">Semi-Pro</option>
+              <option value="Pro">Pro</option>
+              <option value="Elite">Elite</option>
+            </select>
+            <label for="rankSelect">Rank</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- CarSelect component -->
+      <car-select id="carSelect" v-model="eventForm.car" :car-groups="carGroups" class="mb-3">
+      </car-select>
+
+      <div class="row mb-3">
+        <div class="col-8">
+          <div class="form-floating">
+            <select class="form-select form-select-lg h-100 fs-6 mb-3" id="eventSelect" v-model="eventForm.type"
+              aria-label="large select for event type">
+              <option :value="null" disabled>Choose event</option>
+              <option value="Career Rally">Career Rally</option>
+              <option value="Career Rallycross">Career Rallycross</option>
+              <option value="Daily Challenge">Daily Challenge</option>
+              <option value="Weekly Challenge">Weekly Challenge</option>
+              <option value="Monthly Challenge">Monthly Challenge</option>
+              <option value="Daily AI Challenge">Daily AI Challenge</option>
+              <option value="Weekly AI Challenge">Weekly AI Challenge</option>
+              <option value="Monthly AI Challenge">Monthly AI Challenge</option>
+            </select>
+            <label for="eventSelect">Event type</label>
+          </div>
+        </div>
+        <div class="form-floating col-4">
+          <input type="number" class="form-control" id="floatingRaceNumber" placeholder="6" min="1"
+            v-model.number="eventForm.stageCount">
+          <label for="floatingRaceNumber" class="ms-2"># of stages</label>
+        </div>
+      </div>
+    </form>
+    <template #footer>
+      <button type="button" class="btn btn-custom" @click="saveEvent">Save Event</button>
+    </template>
+  </base-modal>
 
   <main class="bg-light pb-5">
     <!-- Main container for all page content -->
@@ -226,15 +207,13 @@
                     <p class="mb-3">Next Stage: {{ event.nextStage }}, {{ event.country }}</p>
                   </div>
                   <div class="col-1">
-                    <i class="bi bi-pencil fs-3" role="button" data-bs-toggle="modal" data-bs-target="#eventsModal"
-                      @click="editEvent(index)"></i>
+                    <i class="bi bi-pencil fs-3" role="button" @click="editEvent(index)"></i>
                   </div>
                   <div class="col-1">
                     <i class="bi bi-trash fs-3" role="button" @click="deleteEvent(index)"></i>
                   </div>
                 </div>
-                <button type="button" class="btn btn-custom w-100" data-bs-toggle="modal" data-bs-target="#resultsModal"
-                  @click="prefillResultForEvent(event, index)">
+                <button type="button" class="btn btn-custom w-100" @click="prefillResultForEvent(event, index)">
                   + Add Result
                 </button>
               </div>
@@ -243,9 +222,8 @@
 
         </div>
         <div class="col-lg-4 align-self-start">
-          <button type="button" class="btn btn-custom w-100 py-5 fs-4" data-bs-toggle="modal"
-            data-bs-target="#eventsModal" @click="startAddEvent">+
-            Add Event</button>
+          <button type="button" class="btn btn-custom w-100 py-5 fs-4" @click="startAddEvent">
+            + Add Event</button>
         </div>
       </div>
       <!-- Second row: Stages and Statistics -->
@@ -282,8 +260,7 @@
               </tr>
             </tbody>
           </table>
-          <button type="button" class="btn btn-custom w-100 py-3" data-bs-toggle="modal" data-bs-target="#resultsModal"
-            @click="startAddResult()">+ Add
+          <button type="button" class="btn btn-custom w-100 py-3" @click="startAddResult()">+ Add
             Result</button>
         </div>
         <div class="col-lg-6 mt-4">
@@ -314,6 +291,7 @@
   <script src="js/components/CountrySelect.js"></script>
   <script src="js/components/StageSelect.js"></script>
   <script src="js/components/CarSelect.js"></script>
+  <script src="js/components/BaseModal.js"></script>
 
   <script src="js/app.js"></script>
 </body>

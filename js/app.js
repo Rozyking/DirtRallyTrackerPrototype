@@ -11,6 +11,8 @@ const app = createApp({
       selectedCountry: null,
       selectedStage: null,
       editingIndex: null,
+      showEventModal: false,
+      showResultModal: false,
 
       // holds data for accordion blocks with event data
       events: [
@@ -50,7 +52,7 @@ const app = createApp({
 
       // logged stage results - separate from events and feeds stage times table
       results: [
-        { country: "Belgium", stage: "Mettet Circuit", time: "1:24.6", conditions: "Clear", pb: true }
+        { country: "Belgium", stage: "Mettet Circuit", time: "1:24.634", conditions: "Clear", pb: true }
       ],
 
       // data for result modal
@@ -158,12 +160,14 @@ const app = createApp({
     startAddEvent() {
       this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null, country: null, stage: null };
       this.editingIndex = null;
+      this.showEventModal = true;
     },
 
     startAddResult() {
       this.resultForm = { stage: null, position: null, date: null, conditions: null, time: null, notes: "", pb: false, country: this.selectedCountry, car: null };
       this.lockResultContext = false;
       this.activeEventIndex = null;
+      this.showResultModal = true;
     },
 
     saveEvent() {
@@ -195,6 +199,7 @@ const app = createApp({
       }
       this.eventForm = { date: null, rank: null, car: null, type: null, stageCount: null, country: null, stage: null };
       this.editingIndex = null;
+      this.showEventModal = false;
     },
 
     addResult() {
@@ -221,6 +226,7 @@ const app = createApp({
       this.resultForm = { stage: null, position: null, date: null, conditions: null, time: null, notes: "", pb: false, country: null, car: null };
       this.lockResultContext = false;
       this.activeEventIndex = null;
+      this.showResultModal = false;
     },
 
     editEvent(index) {
@@ -235,6 +241,7 @@ const app = createApp({
         stage: event.nextStage
       };
       this.editingIndex = index;
+      this.showEventModal = true;
     },
 
     prefillResultForEvent(event, index) {
@@ -252,6 +259,7 @@ const app = createApp({
       this.selectedCountry = event.country;
       this.lockResultContext = true;
       this.activeEventIndex = index;
+      this.showResultModal = true;
     },
   },
 });
@@ -260,6 +268,7 @@ const app = createApp({
 app.component("country-select", CountrySelect);
 app.component("stage-select", StageSelect);
 app.component("car-select", CarSelect);
+app.component("base-modal", BaseModal);
 
 app.mount("#app");
 
