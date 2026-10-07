@@ -33,7 +33,7 @@ const EventItem = {
             </div>
           </div>
           <button type="button" class="btn btn-custom w-100" @click="$emit('add-result')">
-            + Add Result
+            Add
           </button>
         </div>
       </div>

@@ -13,6 +13,10 @@ $form-check-input-checked-border-color: $brand-dark;
 
 $accordion-button-active-bg: $brand-primary-light;
 $accordion-button-focus-box-shadow: $brand-primary-light;
+$accordion-button-active-color: $brand-dark;
+$accordion-icon-active-color: $brand-primary-dark;
+$accordion-button-focus-border-color: $brand-primary;
+$accordion-button-focus-box-shadow: 0 0 0 0.25rem rgba($brand-primary, 0.25);
 
 $progress-height: 4px;
 $progress-bar-bg: $brand-primary-dark;
@@ -21,11 +25,26 @@ $progress-bar-bg: $brand-primary-dark;
 
 .btn-custom {
   @include button-variant(
-  $background: $brand-primary,
-  $border: $brand-primary,
-  $hover-background: $brand-primary-dark,
-  $hover-border: $brand-primary-dark
+    $background: $brand-primary-dark,
+    $border: $brand-primary-dark,
+    $color: $white,
+    $hover-background: $brand-primary-light,
+    $hover-border: $brand-primary-light,
+    $hover-color: $brand-dark,
+    $active-background: $brand-primary,
+    $active-border: $brand-primary,
+    $active-color: $white
   );
+}
+
+.btn i {
+  color: inherit;
+}
+
+// brand tint for the selected stage row
+.table-active {
+  --bs-table-active-bg: #{rgba($brand-primary-light, 0.35)};
+  --bs-table-active-color: #{$brand-dark};
 }
 
 // Hero
@@ -41,11 +60,12 @@ $progress-bar-bg: $brand-primary-dark;
 }
 
 footer {
-  background-color: $brand-primary-light;
+  background-color: $brand-primary-dark;
+  color: $white;
 }
 
 i {
-  color: $brand-primary
+  color: $brand-primary-dark;
 }
 
 body {
